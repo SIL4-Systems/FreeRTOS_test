@@ -76,6 +76,12 @@
 #include "uart.h"
 #include "eth.h"
 
+#include "FreeRTOS_Sockets.h"
+
+#include "helpers.h"
+#include "emac.h"
+#include "mdio.h"
+
 /* FOr the LED tasks to randomize the blinking */
 unsigned int SubTask_Number = 0;
 unsigned int Task_Number = 9;
@@ -147,7 +153,6 @@ typedef enum {
     EMIF_FAULT_OFF
 } EMIF_OUTPUT_CONTROL;
 
-
 static void InitializePeripherals(void);
 static InitializeTimer(void);
 static void RS485Task( void *pvParameters );
@@ -163,17 +168,6 @@ void EMIFTaskCheckNotifications(void);
 
 void ethSetManualControl(unsigned char command);
 
-/* Forward declarations for the LED blinky tasks */
-//void Running_LED_demo(void);
-//void run_LED_StartUp(void);
-
-static void tmpWait(int up)
-{
-    int i = 0;
-    while(i<=up)
-        i++;
-}
-
 /* USER CODE END */
 
 /** @fn void main(void)
@@ -187,44 +181,46 @@ static void tmpWait(int up)
 /* USER CODE BEGIN (2) */
 /* USER CODE END */
 
-//uint8	emacAddress[6U] = 	{0x00U, 0x08U, 0xEEU, 0x03U, 0xA6U, 0x6CU};
-uint8   emacAddress[6U] =   {0xffU, 0xffU, 0xffU, 0xffU, 0xffU, 0xffU};
+uint8	emacAddress[6U] = 	{0x00U, 0x08U, 0xEEU, 0x03U, 0xA6U, 0x6CU};
 uint32 	emacPhyAddress	=	1U;
 
 int main(void)
 {
 /* USER CODE BEGIN (3) */
+    special_debug_flag = 0;
+
     BaseType_t returnVal = pdFALSE;;
     char *message = "hello\n";
-    char testMessage[32];
 
     // Initialize the peripherals
     InitializePeripherals();
     //read_result = (unsigned short*)pvPortMalloc(TOTAL_BYTES_PER_PAGE+2); //attempt to allocate memory for reading data from NANDz
-    //read_result =
     _enable_interrupts();
     xRecursiveMutex = xSemaphoreCreateRecursiveMutex();
     UARTwrite(message, strlen(message));
 //    free(message);
 
     /* Create Tasks */
-    xTask1Queue = xQueueCreate(1, sizeof(long));
-    xTask2Queue = xQueueCreate(1, sizeof(long));
+    xTask1Queue = xQueueCreate(3, sizeof(long));
+    xTask2Queue = xQueueCreate(3, sizeof(long));
 
     SubTask_Number = 0;
     long xmitVal = 1;
     xQueueSendToBack(xTask2Queue, &xmitVal, portMAX_DELAY);
 
-    //initEMIF();
+//    initEMIF();
 
     //Create RS-485 Task
-//    if (xTaskCreate(RS485Task,"RS485Task", configMINIMAL_STACK_SIZE, NULL, 2, &RS485TaskHandle) != pdTRUE)
-//    {
-//        message = "Could not create RS485Task\n";
-//        UARTwrite(message,strlen(message));
-//        free(message);
-//        while(1);
-//    }
+    if (xTaskCreate(RS485Task,"RS485Task", configMINIMAL_STACK_SIZE, NULL, 2, &RS485TaskHandle) != pdTRUE)
+    {
+        message = "Could not create RS485Task\n";
+        UARTwrite(message,strlen(message));
+        vPortFree(message);
+        while(1);
+    } else {
+        message = "Could not create RS485Task\n";
+        UARTwrite(message,strlen(message));
+    }
 
 //    UARTwrite("here1\n",strlen("here1\n"));
 
@@ -248,15 +244,23 @@ int main(void)
 //    }
 //    UARTwrite("here2\n",strlen("here2\n"));
 
-    UARTwrite("Performing IP INIT\n", strlen("Performing IP INIT"));
+//    special_debug_flag = 0;
 
-    returnVal = FreeRTOS_IPInit( ucIPAddress,
-                                 ucNetMask,
-                                 NULL,
-                                 ucDNSServerAddress,
-                                 emacAddress );
+    UARTwrite("Performing IP INIT\n", strlen("Performing IP INIT\n"));
 
-    if (xTaskCreate(EthernetTask,"EthernetTask", configMINIMAL_STACK_SIZE, NULL,3 , &EthernetTaskHandle) != pdTRUE) {
+    printMACAddress();
+
+    if (FreeRTOS_IPInit( ucIPAddress, ucNetMask, ucGatewayAddress, ucDNSServerAddress, emacAddress ) == pdFAIL) {
+        UARTwrite("IP INIT failure!\n", strlen("IP INIT failure!\n"));
+    } else {
+        UARTwrite("IP assignment success\n",strlen("IP assignment success\n"));
+    }
+
+    printFreeHeapSize();
+
+    printMACAddress();
+
+    if (xTaskCreate(EthernetTask,"EthernetTask", 1024, NULL,3 , &EthernetTaskHandle) != pdTRUE) {
         message = "Could not create EthernetTask\n";
         UARTwrite(message, strlen(message));
         free(message);
@@ -266,9 +270,9 @@ int main(void)
         UARTwrite(message,strlen(message));
     }
 
+    printFreeHeapSize();
 
-
-    UARTwrite("here3\n", strlen("here3\n"));
+//    UARTwrite("here3\n", strlen("here3\n"));
     //Create EMIF Task
 //    static portSTACK_TYPE xTaskStack[ 512 ] __attribute__((aligned(512*4)));
 //
@@ -314,11 +318,13 @@ int main(void)
 
     UARTwrite("Starting scheduler...",strlen("Starting scheduler..."));
 
+//    special_debug_flag = 2786;
     /* Start the OS scheduler */
     vTaskStartScheduler();
 
     UARTwrite("Starting the indefinite loop now", strlen("Starting the indefinite loop now"));
 
+    vPortFree(message);
     /* Shouldn't get here unless the idle task couldn't be created */
     for(;;);
 
@@ -345,8 +351,7 @@ OUTPUTS                 :
 FUNCTION CALLED BY      : main()
 FUNCTION CALLING        : sciInit(),
 ******************************************************************************/
-static void InitializePeripherals()
-{
+static void InitializePeripherals() {
     //uint8 ip_addr[4] = { 10, 1, 10, 96  };
     //uint8 netmask[4] = { 255, 0, 0, 0 };
     //uint8 gateway[4] = { 10, 1, 10, 1 };
@@ -363,6 +368,7 @@ static void InitializePeripherals()
     //gioSetDirection(gioPORTA, 0b00001000);
     gioPORTB->PSL = gioPORTB->PSL | 0b10000000; //pullup/down select
     gioPORTB->PULDIS = gioPORTB->PULDIS | 0b10000000; //pullup/down enable
+
     /*
     while(1)
     {
@@ -408,6 +414,33 @@ static void InitializePeripherals()
     sciReceive(scilinREG, 0, g_ucSciLinRxReg);
 
     rs485RegInit();
+
+    /** eth stuff */
+    UARTwrite("Starting ETH config!", strlen("Starting ETH config!"));
+
+    MDIOInit(MDIO_0_BASE, configCPU_CLOCK_HZ, 2500000);
+
+    UARTwrite("Starting EMAC config!", strlen("Starting EMAC config!"));
+//
+    EMACInit(EMAC_CTRL_0_BASE, EMAC_0_BASE);
+//
+//    UARTwrite("Starting PHY config!", strlen("Starting PHY config!"));
+//
+    EMACMACSrcAddrSet(EMAC_CTRL_0_BASE, emacAddress);
+//
+    hdkif_t *hdkif = pvPortMalloc(sizeof(hdkif_t *));
+    hdkif->emac_base = EMAC_0_BASE;
+    hdkif->phy_addr = EMAC_PHYADDRESS;
+    hdkif->mdio_base = MDIO_0_BASE;
+
+    // Initialize and configure the DP83640 PHY and setup the link
+    if (EMACLinkSetup(hdkif) != EMAC_ERR_OK) {
+        UARTwrite("PHY link setup failed\n", strlen("PHY link setup failed\n"));
+        while (1);
+    } else {
+        UARTwrite("PHY link setup successfully\n", strlen("PHY link setup successfully\n"));
+    }
+
 //#if 0
 //   EMAC_LwIP_Main(emacAddress ,ip_addr, netmask,gateway);
 //#endif
@@ -464,6 +497,21 @@ static InitializeTimer()
 
 void vApplicationMallocFailedHook(void){
     UARTwrite("!!!!!!!!!!!!\n",strlen("!!!!!!!!!!!!\n"));
+}
+
+// This function will be called if a stack overflow is detected
+void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName)
+{
+    // Print out the name of the task that overflowed its stack
+    UARTwrite("Stack overflow in task: ", strlen("Stack overflow in task: "));
+    UARTwrite(pcTaskName, strlen(pcTaskName));
+    UARTwrite("\n", 1);
+
+    // Optionally, you can add code here to handle the stack overflow
+    // For example, you can log the error, reset the system, etc.
+
+    // Enter an infinite loop to halt the system
+    while (1);
 }
 
 uint16_t ethReadEmifLocation(char memSuffix){

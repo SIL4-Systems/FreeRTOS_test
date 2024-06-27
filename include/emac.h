@@ -71,7 +71,7 @@ extern "C" {
 /* Macros for enabling taken as inputs from HALCoGen GUI. */
 #define EMAC_TX_ENABLE					(1U)				
 #define EMAC_RX_ENABLE					(1U)
-#define EMAC_MII_ENABLE					(1U)
+#define EMAC_MII_ENABLE					(0U)
 #define EMAC_FULL_DUPLEX_ENABLE			(1U)
 #define EMAC_LOOPBACK_ENABLE			(0U)
 #define EMAC_BROADCAST_ENABLE			(1U)

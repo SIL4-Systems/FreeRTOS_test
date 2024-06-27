@@ -56,6 +56,9 @@
 #include "FreeRTOS_Sockets.h"
 #include "NetworkBufferManagement.h"
 
+// Debugging Socket issue
+#include "uart.h"
+
 /* Sanity check the UDP payload length setting is compatible with the
 fragmentation setting. */
 #if ipconfigCAN_FRAGMENT_OUTGOING_PACKETS == 1
@@ -103,18 +106,7 @@ xListItem * pxListFindListItemWithValue( xList *pxList, TickType_t xWantedItemVa
 
 /*-----------------------------------------------------------*/
 
-typedef struct XSOCKET
-{
-	xSemaphoreHandle xWaitingPacketSemaphore;
-	xList xWaitingPacketsList;
-	xListItem xBoundSocketListItem; /* Used to reference the socket from a bound sockets list. */
-	TickType_t xReceiveBlockTime;
-	TickType_t xSendBlockTime;
-	uint8_t ucSocketOptions;
-	#if ipconfigSUPPORT_SELECT_FUNCTION == 1
-		xQueueHandle xSelectQueue;
-	#endif
-} xFreeRTOS_Socket_t;
+
 
 
 /* The list that contains mappings between sockets and port numbers.  Accesses
@@ -133,8 +125,12 @@ xFreeRTOS_Socket_t *pxSocket;
 	configASSERT( xProtocol == FREERTOS_IPPROTO_UDP );
 	configASSERT( listLIST_IS_INITIALISED( &xBoundSocketsList ) );
 
+	UARTwrite("Allocating...", strlen("Allocating..."));
+
 	/* Allocate the structure that will hold the socket information. */
 	pxSocket = ( xFreeRTOS_Socket_t * ) pvPortMalloc( sizeof( xFreeRTOS_Socket_t ) );
+
+    UARTwrite("Allocated!\n", strlen("Allocated!\n"));
 
 	if( pxSocket == NULL )
 	{

@@ -13,6 +13,8 @@
 
 #include "uart.h"
 
+#include "helpers.h"
+
 /** @brief Use DHCP for IP configuration if set to 1 */
 #define USE_DHCP    1
 
@@ -27,6 +29,7 @@ static const uint8_t ucDNSServerAddress[ 4 ] = { 8, 8, 8, 8 };
 /** @brief Task handle for ethernet */
 xTaskHandle EthernetTaskHandle;
 
+extern int special_debug_flag;
 
 /**
  * @brief     Event hook for IP Network Event

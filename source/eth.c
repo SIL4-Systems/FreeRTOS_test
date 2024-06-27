@@ -87,9 +87,25 @@ void EthernetTask(void *pvParameters) {
     int32_t lRecvBytes;
     const TickType_t xReceiveTimeOut = pdMS_TO_TICKS( 200 );
     socklen_t xSourceAddressLength = sizeof( xSourceAddress );
+    UARTwrite("Socket...\n", strlen("Socket...\n"));
 
     // Create a UDP socket
+    special_debug_flag = 2786;
     xSocket = FreeRTOS_socket( FREERTOS_AF_INET, FREERTOS_SOCK_DGRAM, FREERTOS_IPPROTO_UDP );
+    special_debug_flag = 0;
+    if (xSocket == FREERTOS_INVALID_SOCKET)
+    {
+        UARTwrite("Failed to create socket\n", strlen("Failed to create socket\n"));
+        while (1);
+    }
+    else
+    {
+        UARTwrite("Socket created successfully\n", strlen("Socket created successfully\n"));
+    }
+
+
+    UARTwrite("Socket...\n", strlen("Socket...\n"));
+
     configASSERT( xSocket != FREERTOS_INVALID_SOCKET );
 
     UARTwrite("Socket...\n", strlen("Socket...\n"));

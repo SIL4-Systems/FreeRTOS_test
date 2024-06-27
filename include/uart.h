@@ -8,6 +8,9 @@
 #include "sci.h"
 #include "os_semphr.h"
 
+/** @brief A special debug flag that limits the number of serial debug statements */
+int special_debug_flag;
+
 /** @brief Semaphore */
 SemaphoreHandle_t xRecursiveMutex;
 

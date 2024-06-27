@@ -48,6 +48,7 @@
 
 /* Application level configuration options. */
 #include "FreeRTOSIPConfig.h"
+#include "os_semphr.h"
 
 #ifndef INC_FREERTOS_H
 	#error FreeRTOS.h must be included before FreeRTOS_Sockets.h.
@@ -103,6 +104,19 @@ struct freertos_sockaddr
 	uint16_t sin_port;
 	uint32_t sin_addr;
 };
+
+typedef struct XSOCKET
+{
+    xSemaphoreHandle xWaitingPacketSemaphore;
+    xList xWaitingPacketsList;
+    xListItem xBoundSocketListItem; /* Used to reference the socket from a bound sockets list. */
+    TickType_t xReceiveBlockTime;
+    TickType_t xSendBlockTime;
+    uint8_t ucSocketOptions;
+    #if ipconfigSUPPORT_SELECT_FUNCTION == 1
+        xQueueHandle xSelectQueue;
+    #endif
+} xFreeRTOS_Socket_t;
 
 #if ipconfigBYTE_ORDER == FREERTOS_LITTLE_ENDIAN
 
