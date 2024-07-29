@@ -43,12 +43,6 @@ source/notification.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/reg_htu.h
 source/notification.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/gio.h
 source/notification.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/sci.h
 source/notification.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/reg_sci.h
-source/notification.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/spi.h
-source/notification.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/reg_spi.h
-source/notification.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/dcc.h
-source/notification.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/reg_dcc.h
-source/notification.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/i2c.h
-source/notification.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/reg_i2c.h
 source/notification.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/sys_dma.h
 source/notification.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/reg_dma.h
 source/notification.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/emac.h
@@ -184,18 +178,6 @@ D:/SIL4/repos/TI/HelloWorld_RM46/include/gio.h:
 D:/SIL4/repos/TI/HelloWorld_RM46/include/sci.h:
 
 D:/SIL4/repos/TI/HelloWorld_RM46/include/reg_sci.h:
-
-D:/SIL4/repos/TI/HelloWorld_RM46/include/spi.h:
-
-D:/SIL4/repos/TI/HelloWorld_RM46/include/reg_spi.h:
-
-D:/SIL4/repos/TI/HelloWorld_RM46/include/dcc.h:
-
-D:/SIL4/repos/TI/HelloWorld_RM46/include/reg_dcc.h:
-
-D:/SIL4/repos/TI/HelloWorld_RM46/include/i2c.h:
-
-D:/SIL4/repos/TI/HelloWorld_RM46/include/reg_i2c.h:
 
 D:/SIL4/repos/TI/HelloWorld_RM46/include/sys_dma.h:
 

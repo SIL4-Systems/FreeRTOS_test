@@ -56,6 +56,13 @@ FreeRTOS+UDP/source/FreeRTOS_Sockets.obj: D:/SIL4/repos/TI/HelloWorld_RM46/FreeR
 FreeRTOS+UDP/source/FreeRTOS_Sockets.obj: D:/SIL4/ti/ccs1120/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/string.h
 FreeRTOS+UDP/source/FreeRTOS_Sockets.obj: D:/SIL4/ti/ccs1120/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/xlocale/_string.h
 FreeRTOS+UDP/source/FreeRTOS_Sockets.obj: D:/SIL4/repos/TI/HelloWorld_RM46/FreeRTOS+UDP/include/NetworkBufferManagement.h
+FreeRTOS+UDP/source/FreeRTOS_Sockets.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/uart.h
+FreeRTOS+UDP/source/FreeRTOS_Sockets.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/sci.h
+FreeRTOS+UDP/source/FreeRTOS_Sockets.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/reg_sci.h
+FreeRTOS+UDP/source/FreeRTOS_Sockets.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/sys_common.h
+FreeRTOS+UDP/source/FreeRTOS_Sockets.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/hal_stdtypes.h
+FreeRTOS+UDP/source/FreeRTOS_Sockets.obj: D:/SIL4/ti/ccs1120/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdbool.h
+FreeRTOS+UDP/source/FreeRTOS_Sockets.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/reg_gio.h
 
 ../FreeRTOS+UDP/source/FreeRTOS_Sockets.c:
 
@@ -168,4 +175,18 @@ D:/SIL4/ti/ccs1120/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/string.h:
 D:/SIL4/ti/ccs1120/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/xlocale/_string.h:
 
 D:/SIL4/repos/TI/HelloWorld_RM46/FreeRTOS+UDP/include/NetworkBufferManagement.h:
+
+D:/SIL4/repos/TI/HelloWorld_RM46/include/uart.h:
+
+D:/SIL4/repos/TI/HelloWorld_RM46/include/sci.h:
+
+D:/SIL4/repos/TI/HelloWorld_RM46/include/reg_sci.h:
+
+D:/SIL4/repos/TI/HelloWorld_RM46/include/sys_common.h:
+
+D:/SIL4/repos/TI/HelloWorld_RM46/include/hal_stdtypes.h:
+
+D:/SIL4/ti/ccs1120/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdbool.h:
+
+D:/SIL4/repos/TI/HelloWorld_RM46/include/reg_gio.h:
 

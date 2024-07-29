@@ -721,21 +721,21 @@ void i2cGetConfigValue(i2c_config_reg_t *config_reg, config_value_type_t type)
 {
     if (type == InitialValue)
     {
-        config_reg->CONFIG_OAR  = I2C_OAR_CONFIGVALUE;
-        config_reg->CONFIG_IMR  = I2C_IMR_CONFIGVALUE;
-        config_reg->CONFIG_CLKL = I2C_CLKL_CONFIGVALUE;
-        config_reg->CONFIG_CLKH = I2C_CLKH_CONFIGVALUE;
-        config_reg->CONFIG_CNT  = I2C_CNT_CONFIGVALUE;
-        config_reg->CONFIG_SAR  = I2C_SAR_CONFIGVALUE;
-        config_reg->CONFIG_MDR  = I2C_MDR_CONFIGVALUE;
-        config_reg->CONFIG_EMDR = I2C_EMDR_CONFIGVALUE;
-        config_reg->CONFIG_PSC  = I2C_PSC_CONFIGVALUE;
-        config_reg->CONFIG_DMAC = I2C_DMAC_CONFIGVALUE;
-        config_reg->CONFIG_FUN  = I2C_FUN_CONFIGVALUE;
-        config_reg->CONFIG_DIR  = I2C_DIR_CONFIGVALUE;
-        config_reg->CONFIG_ODR  = I2C_ODR_CONFIGVALUE;
-        config_reg->CONFIG_PD   = I2C_PD_CONFIGVALUE;
-        config_reg->CONFIG_PSL  = I2C_PSL_CONFIGVALUE;
+//        config_reg->CONFIG_OAR  = I2C_OAR_CONFIGVALUE;
+//        config_reg->CONFIG_IMR  = I2C_IMR_CONFIGVALUE;
+//        config_reg->CONFIG_CLKL = I2C_CLKL_CONFIGVALUE;
+//        config_reg->CONFIG_CLKH = I2C_CLKH_CONFIGVALUE;
+//        config_reg->CONFIG_CNT  = I2C_CNT_CONFIGVALUE;
+//        config_reg->CONFIG_SAR  = I2C_SAR_CONFIGVALUE;
+//        config_reg->CONFIG_MDR  = I2C_MDR_CONFIGVALUE;
+//        config_reg->CONFIG_EMDR = I2C_EMDR_CONFIGVALUE;
+//        config_reg->CONFIG_PSC  = I2C_PSC_CONFIGVALUE;
+//        config_reg->CONFIG_DMAC = I2C_DMAC_CONFIGVALUE;
+//        config_reg->CONFIG_FUN  = I2C_FUN_CONFIGVALUE;
+//        config_reg->CONFIG_DIR  = I2C_DIR_CONFIGVALUE;
+//        config_reg->CONFIG_ODR  = I2C_ODR_CONFIGVALUE;
+//        config_reg->CONFIG_PD   = I2C_PD_CONFIGVALUE;
+//        config_reg->CONFIG_PSL  = I2C_PSL_CONFIGVALUE;
     }
     else
     {

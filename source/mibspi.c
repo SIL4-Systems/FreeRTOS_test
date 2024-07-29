@@ -868,30 +868,30 @@ void mibspi1GetConfigValue(mibspi_config_reg_t *config_reg, config_value_type_t 
 {
     if (type == InitialValue)
     {
-        config_reg->CONFIG_GCR1       = MIBSPI1_GCR1_CONFIGVALUE;
-        config_reg->CONFIG_INT0       = MIBSPI1_INT0_CONFIGVALUE;
-        config_reg->CONFIG_LVL        = MIBSPI1_LVL_CONFIGVALUE;
-        config_reg->CONFIG_PCFUN      = MIBSPI1_PCFUN_CONFIGVALUE;
-        config_reg->CONFIG_PCDIR      = MIBSPI1_PCDIR_CONFIGVALUE;
-        config_reg->CONFIG_PCPDR      = MIBSPI1_PCPDR_CONFIGVALUE;
-        config_reg->CONFIG_PCDIS      = MIBSPI1_PCDIS_CONFIGVALUE;
-        config_reg->CONFIG_PCPSL      = MIBSPI1_PCPSL_CONFIGVALUE;
-        config_reg->CONFIG_DELAY      = MIBSPI1_DELAY_CONFIGVALUE;
-        config_reg->CONFIG_FMT0       = MIBSPI1_FMT0_CONFIGVALUE;
-        config_reg->CONFIG_FMT1       = MIBSPI1_FMT1_CONFIGVALUE;
-        config_reg->CONFIG_FMT2       = MIBSPI1_FMT2_CONFIGVALUE;
-        config_reg->CONFIG_FMT3       = MIBSPI1_FMT3_CONFIGVALUE;
-        config_reg->CONFIG_MIBSPIE    = MIBSPI1_MIBSPIE_CONFIGVALUE;
-        config_reg->CONFIG_LTGPEND    = MIBSPI1_LTGPEND_CONFIGVALUE;
-        config_reg->CONFIG_TGCTRL[0U] = MIBSPI1_TGCTRL0_CONFIGVALUE;
-        config_reg->CONFIG_TGCTRL[1U] = MIBSPI1_TGCTRL1_CONFIGVALUE;
-        config_reg->CONFIG_TGCTRL[2U] = MIBSPI1_TGCTRL2_CONFIGVALUE;
-        config_reg->CONFIG_TGCTRL[3U] = MIBSPI1_TGCTRL3_CONFIGVALUE;
-        config_reg->CONFIG_TGCTRL[4U] = MIBSPI1_TGCTRL4_CONFIGVALUE;
-        config_reg->CONFIG_TGCTRL[5U] = MIBSPI1_TGCTRL5_CONFIGVALUE;
-        config_reg->CONFIG_TGCTRL[6U] = MIBSPI1_TGCTRL6_CONFIGVALUE;
-        config_reg->CONFIG_TGCTRL[7U] = MIBSPI1_TGCTRL7_CONFIGVALUE;
-        config_reg->CONFIG_UERRCTRL   = MIBSPI1_UERRCTRL_CONFIGVALUE;
+//        config_reg->CONFIG_GCR1       = MIBSPI1_GCR1_CONFIGVALUE;
+//        config_reg->CONFIG_INT0       = MIBSPI1_INT0_CONFIGVALUE;
+//        config_reg->CONFIG_LVL        = MIBSPI1_LVL_CONFIGVALUE;
+//        config_reg->CONFIG_PCFUN      = MIBSPI1_PCFUN_CONFIGVALUE;
+//        config_reg->CONFIG_PCDIR      = MIBSPI1_PCDIR_CONFIGVALUE;
+//        config_reg->CONFIG_PCPDR      = MIBSPI1_PCPDR_CONFIGVALUE;
+//        config_reg->CONFIG_PCDIS      = MIBSPI1_PCDIS_CONFIGVALUE;
+//        config_reg->CONFIG_PCPSL      = MIBSPI1_PCPSL_CONFIGVALUE;
+//        config_reg->CONFIG_DELAY      = MIBSPI1_DELAY_CONFIGVALUE;
+//        config_reg->CONFIG_FMT0       = MIBSPI1_FMT0_CONFIGVALUE;
+//        config_reg->CONFIG_FMT1       = MIBSPI1_FMT1_CONFIGVALUE;
+//        config_reg->CONFIG_FMT2       = MIBSPI1_FMT2_CONFIGVALUE;
+//        config_reg->CONFIG_FMT3       = MIBSPI1_FMT3_CONFIGVALUE;
+//        config_reg->CONFIG_MIBSPIE    = MIBSPI1_MIBSPIE_CONFIGVALUE;
+//        config_reg->CONFIG_LTGPEND    = MIBSPI1_LTGPEND_CONFIGVALUE;
+//        config_reg->CONFIG_TGCTRL[0U] = MIBSPI1_TGCTRL0_CONFIGVALUE;
+//        config_reg->CONFIG_TGCTRL[1U] = MIBSPI1_TGCTRL1_CONFIGVALUE;
+//        config_reg->CONFIG_TGCTRL[2U] = MIBSPI1_TGCTRL2_CONFIGVALUE;
+//        config_reg->CONFIG_TGCTRL[3U] = MIBSPI1_TGCTRL3_CONFIGVALUE;
+//        config_reg->CONFIG_TGCTRL[4U] = MIBSPI1_TGCTRL4_CONFIGVALUE;
+//        config_reg->CONFIG_TGCTRL[5U] = MIBSPI1_TGCTRL5_CONFIGVALUE;
+//        config_reg->CONFIG_TGCTRL[6U] = MIBSPI1_TGCTRL6_CONFIGVALUE;
+//        config_reg->CONFIG_TGCTRL[7U] = MIBSPI1_TGCTRL7_CONFIGVALUE;
+//        config_reg->CONFIG_UERRCTRL   = MIBSPI1_UERRCTRL_CONFIGVALUE;
     }
     else
     {

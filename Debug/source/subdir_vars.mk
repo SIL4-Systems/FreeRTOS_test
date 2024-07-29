@@ -27,9 +27,11 @@ C_SRCS += \
 ../source/eqep.c \
 ../source/errata_SSWF021_45.c \
 ../source/esm.c \
+../source/eth.c \
 ../source/etpwm.c \
 ../source/eventhandler.c \
 ../source/gio.c \
+../source/helpers.c \
 ../source/het.c \
 ../source/i2c.c \
 ../source/lin.c \
@@ -60,7 +62,8 @@ C_SRCS += \
 ../source/sys_selftest.c \
 ../source/sys_startup.c \
 ../source/sys_vim.c \
-../source/system.c 
+../source/system.c \
+../source/uart.c 
 
 C_DEPS += \
 ./source/adc.d \
@@ -73,9 +76,11 @@ C_DEPS += \
 ./source/eqep.d \
 ./source/errata_SSWF021_45.d \
 ./source/esm.d \
+./source/eth.d \
 ./source/etpwm.d \
 ./source/eventhandler.d \
 ./source/gio.d \
+./source/helpers.d \
 ./source/het.d \
 ./source/i2c.d \
 ./source/lin.d \
@@ -106,7 +111,8 @@ C_DEPS += \
 ./source/sys_selftest.d \
 ./source/sys_startup.d \
 ./source/sys_vim.d \
-./source/system.d 
+./source/system.d \
+./source/uart.d 
 
 OBJS += \
 ./source/adc.obj \
@@ -120,9 +126,11 @@ OBJS += \
 ./source/eqep.obj \
 ./source/errata_SSWF021_45.obj \
 ./source/esm.obj \
+./source/eth.obj \
 ./source/etpwm.obj \
 ./source/eventhandler.obj \
 ./source/gio.obj \
+./source/helpers.obj \
 ./source/het.obj \
 ./source/i2c.obj \
 ./source/lin.obj \
@@ -158,7 +166,8 @@ OBJS += \
 ./source/sys_selftest.obj \
 ./source/sys_startup.obj \
 ./source/sys_vim.obj \
-./source/system.obj 
+./source/system.obj \
+./source/uart.obj 
 
 ASM_DEPS += \
 ./source/dabort.d \
@@ -180,9 +189,11 @@ OBJS__QUOTED += \
 "source\eqep.obj" \
 "source\errata_SSWF021_45.obj" \
 "source\esm.obj" \
+"source\eth.obj" \
 "source\etpwm.obj" \
 "source\eventhandler.obj" \
 "source\gio.obj" \
+"source\helpers.obj" \
 "source\het.obj" \
 "source\i2c.obj" \
 "source\lin.obj" \
@@ -218,7 +229,8 @@ OBJS__QUOTED += \
 "source\sys_selftest.obj" \
 "source\sys_startup.obj" \
 "source\sys_vim.obj" \
-"source\system.obj" 
+"source\system.obj" \
+"source\uart.obj" 
 
 C_DEPS__QUOTED += \
 "source\adc.d" \
@@ -231,9 +243,11 @@ C_DEPS__QUOTED += \
 "source\eqep.d" \
 "source\errata_SSWF021_45.d" \
 "source\esm.d" \
+"source\eth.d" \
 "source\etpwm.d" \
 "source\eventhandler.d" \
 "source\gio.d" \
+"source\helpers.d" \
 "source\het.d" \
 "source\i2c.d" \
 "source\lin.d" \
@@ -264,7 +278,8 @@ C_DEPS__QUOTED += \
 "source\sys_selftest.d" \
 "source\sys_startup.d" \
 "source\sys_vim.d" \
-"source\system.d" 
+"source\system.d" \
+"source\uart.d" 
 
 ASM_DEPS__QUOTED += \
 "source\dabort.d" \
@@ -285,9 +300,11 @@ C_SRCS__QUOTED += \
 "../source/eqep.c" \
 "../source/errata_SSWF021_45.c" \
 "../source/esm.c" \
+"../source/eth.c" \
 "../source/etpwm.c" \
 "../source/eventhandler.c" \
 "../source/gio.c" \
+"../source/helpers.c" \
 "../source/het.c" \
 "../source/i2c.c" \
 "../source/lin.c" \
@@ -318,7 +335,8 @@ C_SRCS__QUOTED += \
 "../source/sys_selftest.c" \
 "../source/sys_startup.c" \
 "../source/sys_vim.c" \
-"../source/system.c" 
+"../source/system.c" \
+"../source/uart.c" 
 
 ASM_SRCS__QUOTED += \
 "../source/dabort.asm" \

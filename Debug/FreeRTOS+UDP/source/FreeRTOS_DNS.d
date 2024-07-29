@@ -57,6 +57,7 @@ FreeRTOS+UDP/source/FreeRTOS_DNS.obj: D:/SIL4/repos/TI/HelloWorld_RM46/FreeRTOS+
 FreeRTOS+UDP/source/FreeRTOS_DNS.obj: D:/SIL4/repos/TI/HelloWorld_RM46/FreeRTOS+UDP/include/FreeRTOS_Sockets.h
 FreeRTOS+UDP/source/FreeRTOS_DNS.obj: D:/SIL4/ti/ccs1120/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/string.h
 FreeRTOS+UDP/source/FreeRTOS_DNS.obj: D:/SIL4/ti/ccs1120/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/xlocale/_string.h
+FreeRTOS+UDP/source/FreeRTOS_DNS.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/os_semphr.h
 FreeRTOS+UDP/source/FreeRTOS_DNS.obj: D:/SIL4/repos/TI/HelloWorld_RM46/FreeRTOS+UDP/include/NetworkInterface.h
 FreeRTOS+UDP/source/FreeRTOS_DNS.obj: D:/SIL4/repos/TI/HelloWorld_RM46/FreeRTOS+UDP/include/pack_struct_start.h
 FreeRTOS+UDP/source/FreeRTOS_DNS.obj: D:/SIL4/repos/TI/HelloWorld_RM46/FreeRTOS+UDP/include/pack_struct_end.h
@@ -174,6 +175,8 @@ D:/SIL4/repos/TI/HelloWorld_RM46/FreeRTOS+UDP/include/FreeRTOS_Sockets.h:
 D:/SIL4/ti/ccs1120/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/string.h:
 
 D:/SIL4/ti/ccs1120/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/xlocale/_string.h:
+
+D:/SIL4/repos/TI/HelloWorld_RM46/include/os_semphr.h:
 
 D:/SIL4/repos/TI/HelloWorld_RM46/FreeRTOS+UDP/include/NetworkInterface.h:
 

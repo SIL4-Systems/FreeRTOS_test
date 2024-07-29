@@ -167,6 +167,43 @@ unsigned long emifFieldToAddr(unsigned char emifParameter);
 void EMIFTaskCheckNotifications(void);
 
 void ethSetManualControl(unsigned char command);
+void initPHY(void);
+
+// PHY Registers (DP83640)
+#define PHY_BCR             0x00    // Basic Control Register
+#define PHY_BSR             0x01    // Basic Status Register
+#define PHY_IDR1            0x02    // PHY Identifier Register 1
+#define PHY_IDR2            0x03    // PHY Identifier Register 2
+#define PHY_ANAR            0x04    // Auto-Negotiation Advertisement Register
+#define PHY_ANLPAR          0x05    // Auto-Negotiation Link Partner Ability Register
+
+// Basic Status Register (BSR) bits
+#define BSR_LINK_STATUS     0x0004  // Link status bit
+
+// Function to read a PHY register
+static uint16_t readPHYRegister(uint32_t mdioBaseAddr, uint32_t phyAddr, uint32_t regNum)
+{
+    uint16_t data;
+    MDIOPhyRegRead(mdioBaseAddr, phyAddr, regNum, &data);
+    return data;
+}
+
+// Function to check PHY link status
+int checkPHYLinkStatus(uint32_t mdioBaseAddr, uint32_t phyAddr)
+{
+    uint16_t bsr = readPHYRegister(mdioBaseAddr, phyAddr, PHY_BSR);
+
+    if (bsr & BSR_LINK_STATUS)
+    {
+        UARTwrite("PHY Link Status: UP\n", strlen("PHY Link Status: UP\n"));
+        return 1;
+    }
+    else
+    {
+        UARTwrite("PHY Link Status: DOWN\n", strlen("PHY Link Status: DOWN\n"));
+        return 0;
+    }
+}
 
 /* USER CODE END */
 
@@ -192,13 +229,19 @@ int main(void)
     BaseType_t returnVal = pdFALSE;;
     char *message = "hello\n";
 
-    // Initialize the peripherals
-    InitializePeripherals();
-    //read_result = (unsigned short*)pvPortMalloc(TOTAL_BYTES_PER_PAGE+2); //attempt to allocate memory for reading data from NANDz
     _enable_interrupts();
     xRecursiveMutex = xSemaphoreCreateRecursiveMutex();
-    UARTwrite(message, strlen(message));
-//    free(message);
+
+    // Initialize the peripherals
+    InitializePeripherals();
+
+    if (EMACHWInit(emacAddress) != EMAC_ERR_CONNECT) {
+        UARTwrite("EMAC HW initialization successful\n", strlen("EMAC HW initialization successful\n"));
+    } else {
+        UARTwrite("EMAC HW initialization failed!\n", strlen("EMAC HW initialization failed!\n"));
+    }
+
+//    EMAC_LwIP_Main(emacAddress);
 
     /* Create Tasks */
     xTask1Queue = xQueueCreate(3, sizeof(long));
@@ -208,47 +251,7 @@ int main(void)
     long xmitVal = 1;
     xQueueSendToBack(xTask2Queue, &xmitVal, portMAX_DELAY);
 
-//    initEMIF();
-
-    //Create RS-485 Task
-    if (xTaskCreate(RS485Task,"RS485Task", configMINIMAL_STACK_SIZE, NULL, 2, &RS485TaskHandle) != pdTRUE)
-    {
-        message = "Could not create RS485Task\n";
-        UARTwrite(message,strlen(message));
-        vPortFree(message);
-        while(1);
-    } else {
-        message = "Could not create RS485Task\n";
-        UARTwrite(message,strlen(message));
-    }
-
-//    UARTwrite("here1\n",strlen("here1\n"));
-
-    //Create SD Card Task
-    /*
-    if (xTaskCreate(SDCardTask,"SDCardTask", configMINIMAL_STACK_SIZE, NULL, 6, &SDCardTaskTaskHandle) != pdTRUE)
-    {
-        message = "Could not create SDCardTask\n";
-        UARTwrite(message,strlen(message));
-        free(message);
-        while(1);
-    }
-*/
-    //Create RTC Task
-//    if (xTaskCreate(RTCTask,"RTCTask", configMINIMAL_STACK_SIZE, NULL,3 , &RTCTaskHandle) != pdTRUE)
-//    {
-//        message = "Could not create RTCTask\n";
-//        UARTwrite(message,strlen(message));
-//        free(message);
-//        while(1);
-//    }
-//    UARTwrite("here2\n",strlen("here2\n"));
-
-//    special_debug_flag = 0;
-
     UARTwrite("Performing IP INIT\n", strlen("Performing IP INIT\n"));
-
-    printMACAddress();
 
     if (FreeRTOS_IPInit( ucIPAddress, ucNetMask, ucGatewayAddress, ucDNSServerAddress, emacAddress ) == pdFAIL) {
         UARTwrite("IP INIT failure!\n", strlen("IP INIT failure!\n"));
@@ -256,21 +259,22 @@ int main(void)
         UARTwrite("IP assignment success\n",strlen("IP assignment success\n"));
     }
 
-    printFreeHeapSize();
+//    checkPHYLinkStatus(MDIO_0_BASE, EMAC_PHYADDRESS);
 
-    printMACAddress();
+    EthernetTask(NULL);
 
-    if (xTaskCreate(EthernetTask,"EthernetTask", 1024, NULL,3 , &EthernetTaskHandle) != pdTRUE) {
-        message = "Could not create EthernetTask\n";
-        UARTwrite(message, strlen(message));
-        free(message);
-        while(1);
-    } else {
-        message = "Created EthernetTask\n";
-        UARTwrite(message,strlen(message));
-    }
+    // Create Ethernet task
+//    configASSERT(xTaskCreate(EthernetTask, "EthernetTask", configMINIMAL_STACK_SIZE * 4, NULL, tskIDLE_PRIORITY + 1, NULL) == pdTRUE);
 
-    printFreeHeapSize();
+//    if (xTaskCreate(EthernetTask,"EthernetTask", configMINIMAL_STACK_SIZE + 100, NULL,3 , &EthernetTaskHandle) != pdTRUE) {
+//        message = "Could not create EthernetTask\n";
+//        UARTwrite(message, strlen(message));
+//        free(message);
+//        while(1);
+//    } else {
+//        message = "Created EthernetTask\n";
+//        UARTwrite(message,strlen(message));
+//    }
 
 //    UARTwrite("here3\n", strlen("here3\n"));
     //Create EMIF Task
@@ -335,6 +339,7 @@ int main(void)
 
 
 /* USER CODE BEGIN (4) */
+
 /******************************************************************************
 FUNCTION NAME           : InitializePeripherals
 PURPOSE & DESCRIPTION   : Initialize all the hardware peripherals in VMP system.
@@ -361,50 +366,19 @@ static void InitializePeripherals() {
     // GPIO initialized
     gioInit();
 
-    gioSetDirection(gioPORTA, 0b00001000); //enable output on 3rd bit
+//    initPHY();
+
+    // Wait for the PHY to initialize (e.g., another 100 ms)
+//    vTaskDelay(pdMS_TO_TICKS(100));
+
+//    gioSetDirection(gioPORTA, 0b00001000); //enable output on 3rd bit
 
    // gioSetDirection(gioPORTB, 0b10000000); //enable output on 7th bit
-    gioSetDirection(gioPORTB, 0b00010000); //enable output to 4th bit (GPIO_LED3)
+//    gioSetDirection(gioPORTB, 0b00010000); //enable output to 4th bit (GPIO_LED3)
     //gioSetDirection(gioPORTA, 0b00001000);
-    gioPORTB->PSL = gioPORTB->PSL | 0b10000000; //pullup/down select
-    gioPORTB->PULDIS = gioPORTB->PULDIS | 0b10000000; //pullup/down enable
+//    gioPORTB->PSL = gioPORTB->PSL | 0b10000000; //pullup/down select
+//    gioPORTB->PULDIS = gioPORTB->PULDIS | 0b10000000; //pullup/down enable
 
-    /*
-    while(1)
-    {
-        gioSetBit(gioPORTB,0,1);
-        gioSetBit(gioPORTB,1,1);
-        gioSetBit(gioPORTB,2,1);
-        gioSetBit(gioPORTB,3,1);
-        gioSetBit(gioPORTB,4,1);
-        tmpWait(10000);
-        //vTaskDelay(100);
-        gioSetBit(gioPORTB,0,0);
-        gioSetBit(gioPORTB,1,0);
-        gioSetBit(gioPORTB,2,0);
-        gioSetBit(gioPORTB,3,0);
-        gioSetBit(gioPORTB,4,0);
-        tmpWait(10000);
-        //vTaskDelay(100);
-    }
-    */
-
-    gioPORTA->PSL = gioPORTA->PSL | 0b00001000; //pullup/down select
-    gioPORTA->PULDIS = gioPORTA->PULDIS | 0b00000000; //pullup/down enable
-    //gioPORTA->PDR = gioPORTA->PDR | 0b00000000; // open drain
-    gioSetBit(gioPORTB,3,1);
-    // SPI initialized for SD card
-    //power_on();
-    /*
-    gioSetBit(spiPORT4,0,0);
-    gioSetBit(spiPORT4,1,0);
-    gioSetBit(spiPORT4,2,0);
-    gioSetBit(spiPORT4,3,0);
-    gioSetBit(spiPORT4,4,0);
-    gioSetBit(spiPORT4,5,0);
-    gioSetBit(spiPORT4,6,0);
-    gioSetBit(spiPORT4,7,0);
-    */
     // Enable IRQ for all Peripherals
     _enable_IRQ();
     // Initialized the free running timer at 0.5 mSec interval
@@ -412,34 +386,47 @@ static void InitializePeripherals() {
     // Activate SCI-2 Interrupt based on TI requirement
     sciSend(scilinREG,0,g_ucSciLinTxReg);
     sciReceive(scilinREG, 0, g_ucSciLinRxReg);
-
-    rs485RegInit();
+//
+//    rs485RegInit();
 
     /** eth stuff */
-    UARTwrite("Starting ETH config!", strlen("Starting ETH config!"));
+//    UARTwrite("Starting ETH config!", strlen("Starting ETH config!"));
+//
+//    MDIOInit(MDIO_0_BASE, configCPU_CLOCK_HZ, 2500000);
+//
+//    UARTwrite("Starting EMAC config!", strlen("Starting EMAC config!"));
+////
+////    UARTwrite("Starting PHY config!", strlen("Starting PHY config!"));
+////
+//    hdkif_t *hdkif = pvPortMalloc(sizeof(hdkif_t *));
+//    hdkif->emac_base = EMAC_0_BASE;
+//    hdkif->phy_addr = EMAC_PHYADDRESS;
+//    hdkif->mdio_base = MDIO_0_BASE;
+//
+//    // Initialize and configure the DP83640 PHY and setup the link
+//    if (EMACLinkSetup(hdkif) != EMAC_ERR_OK) {
+//        UARTwrite("PHY link setup failed\n", strlen("PHY link setup failed\n"));
+//        while (1);
+//    } else {
+//        UARTwrite("PHY link setup successfully\n", strlen("PHY link setup successfully\n"));
+//    }
+//
+//    while (checkPHYLinkStatus(MDIO_0_BASE, EMAC_PHYADDRESS) == 0);
+//
+//    // Example: Configure GIO port A pin 0 as output for PHY reset
+//    gioSetDirection(gioPORTA, 0x00000001);
 
-    MDIOInit(MDIO_0_BASE, configCPU_CLOCK_HZ, 2500000);
+    // Assert PHY reset (set the pin low)
+//    gioSetBit(gioPORTA, 0, 0);
 
-    UARTwrite("Starting EMAC config!", strlen("Starting EMAC config!"));
-//
-    EMACInit(EMAC_CTRL_0_BASE, EMAC_0_BASE);
-//
-//    UARTwrite("Starting PHY config!", strlen("Starting PHY config!"));
-//
-    EMACMACSrcAddrSet(EMAC_CTRL_0_BASE, emacAddress);
-//
-    hdkif_t *hdkif = pvPortMalloc(sizeof(hdkif_t *));
-    hdkif->emac_base = EMAC_0_BASE;
-    hdkif->phy_addr = EMAC_PHYADDRESS;
-    hdkif->mdio_base = MDIO_0_BASE;
+    // Wait for a short duration (e.g., 100 ms)
+//    vTaskDelay(pdMS_TO_TICKS(100));
 
-    // Initialize and configure the DP83640 PHY and setup the link
-    if (EMACLinkSetup(hdkif) != EMAC_ERR_OK) {
-        UARTwrite("PHY link setup failed\n", strlen("PHY link setup failed\n"));
-        while (1);
-    } else {
-        UARTwrite("PHY link setup successfully\n", strlen("PHY link setup successfully\n"));
-    }
+    // Deassert PHY reset (set the pin high)
+//    gioSetBit(gioPORTA, 0, 1);
+
+//    EMACInit(EMAC_CTRL_0_BASE, EMAC_0_BASE);
+//    EMACMACSrcAddrSet(EMAC_CTRL_0_BASE, emacAddress);
 
 //#if 0
 //   EMAC_LwIP_Main(emacAddress ,ip_addr, netmask,gateway);

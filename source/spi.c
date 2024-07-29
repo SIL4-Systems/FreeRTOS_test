@@ -842,19 +842,19 @@ void spi2GetConfigValue(spi_config_reg_t *config_reg, config_value_type_t type)
 {
     if (type == InitialValue)
     {
-        config_reg->CONFIG_GCR1  = SPI2_GCR1_CONFIGVALUE;
-        config_reg->CONFIG_INT0  = SPI2_INT0_CONFIGVALUE;
-        config_reg->CONFIG_LVL   = SPI2_LVL_CONFIGVALUE;
-        config_reg->CONFIG_PC0   = SPI2_PC0_CONFIGVALUE;
-        config_reg->CONFIG_PC1   = SPI2_PC1_CONFIGVALUE;
-        config_reg->CONFIG_PC6   = SPI2_PC6_CONFIGVALUE;
-        config_reg->CONFIG_PC7   = SPI2_PC7_CONFIGVALUE;
-        config_reg->CONFIG_PC8   = SPI2_PC8_CONFIGVALUE;
-        config_reg->CONFIG_DELAY = SPI2_DELAY_CONFIGVALUE;
-        config_reg->CONFIG_FMT0  = SPI2_FMT0_CONFIGVALUE;
-        config_reg->CONFIG_FMT1  = SPI2_FMT1_CONFIGVALUE;
-        config_reg->CONFIG_FMT2  = SPI2_FMT2_CONFIGVALUE;
-        config_reg->CONFIG_FMT3  = SPI2_FMT3_CONFIGVALUE;
+//        config_reg->CONFIG_GCR1  = SPI2_GCR1_CONFIGVALUE;
+//        config_reg->CONFIG_INT0  = SPI2_INT0_CONFIGVALUE;
+//        config_reg->CONFIG_LVL   = SPI2_LVL_CONFIGVALUE;
+//        config_reg->CONFIG_PC0   = SPI2_PC0_CONFIGVALUE;
+//        config_reg->CONFIG_PC1   = SPI2_PC1_CONFIGVALUE;
+//        config_reg->CONFIG_PC6   = SPI2_PC6_CONFIGVALUE;
+//        config_reg->CONFIG_PC7   = SPI2_PC7_CONFIGVALUE;
+//        config_reg->CONFIG_PC8   = SPI2_PC8_CONFIGVALUE;
+//        config_reg->CONFIG_DELAY = SPI2_DELAY_CONFIGVALUE;
+//        config_reg->CONFIG_FMT0  = SPI2_FMT0_CONFIGVALUE;
+//        config_reg->CONFIG_FMT1  = SPI2_FMT1_CONFIGVALUE;
+//        config_reg->CONFIG_FMT2  = SPI2_FMT2_CONFIGVALUE;
+//        config_reg->CONFIG_FMT3  = SPI2_FMT3_CONFIGVALUE;
     }
     else
     {
@@ -898,19 +898,19 @@ void spi4GetConfigValue(spi_config_reg_t *config_reg, config_value_type_t type)
 {
     if (type == InitialValue)
     {
-        config_reg->CONFIG_GCR1  = SPI4_GCR1_CONFIGVALUE;
-        config_reg->CONFIG_INT0  = SPI4_INT0_CONFIGVALUE;
-        config_reg->CONFIG_LVL   = SPI4_LVL_CONFIGVALUE;
-        config_reg->CONFIG_PC0   = SPI4_PC0_CONFIGVALUE;
-        config_reg->CONFIG_PC1   = SPI4_PC1_CONFIGVALUE;
-        config_reg->CONFIG_PC6   = SPI4_PC6_CONFIGVALUE;
-        config_reg->CONFIG_PC7   = SPI4_PC7_CONFIGVALUE;
-        config_reg->CONFIG_PC8   = SPI4_PC8_CONFIGVALUE;
-        config_reg->CONFIG_DELAY = SPI4_DELAY_CONFIGVALUE;
-        config_reg->CONFIG_FMT0  = SPI4_FMT0_CONFIGVALUE;
-        config_reg->CONFIG_FMT1  = SPI4_FMT1_CONFIGVALUE;
-        config_reg->CONFIG_FMT2  = SPI4_FMT2_CONFIGVALUE;
-        config_reg->CONFIG_FMT3  = SPI4_FMT3_CONFIGVALUE;
+//        config_reg->CONFIG_GCR1  = SPI4_GCR1_CONFIGVALUE;
+//        config_reg->CONFIG_INT0  = SPI4_INT0_CONFIGVALUE;
+//        config_reg->CONFIG_LVL   = SPI4_LVL_CONFIGVALUE;
+//        config_reg->CONFIG_PC0   = SPI4_PC0_CONFIGVALUE;
+//        config_reg->CONFIG_PC1   = SPI4_PC1_CONFIGVALUE;
+//        config_reg->CONFIG_PC6   = SPI4_PC6_CONFIGVALUE;
+//        config_reg->CONFIG_PC7   = SPI4_PC7_CONFIGVALUE;
+//        config_reg->CONFIG_PC8   = SPI4_PC8_CONFIGVALUE;
+//        config_reg->CONFIG_DELAY = SPI4_DELAY_CONFIGVALUE;
+//        config_reg->CONFIG_FMT0  = SPI4_FMT0_CONFIGVALUE;
+//        config_reg->CONFIG_FMT1  = SPI4_FMT1_CONFIGVALUE;
+//        config_reg->CONFIG_FMT2  = SPI4_FMT2_CONFIGVALUE;
+//        config_reg->CONFIG_FMT3  = SPI4_FMT3_CONFIGVALUE;
     }
     else
     {

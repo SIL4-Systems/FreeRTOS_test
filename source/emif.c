@@ -211,17 +211,17 @@ void emifGetConfigValue(emif_config_reg_t *config_reg, config_value_type_t type)
 {
     if (type == InitialValue)
     {
-        config_reg->CONFIG_AWCC    = EMIF_AWCC_CONFIGVALUE;
-        config_reg->CONFIG_SDCR    = EMIF_SDCR_CONFIGVALUE;
-        config_reg->CONFIG_SDRCR   = EMIF_SDRCR_CONFIGVALUE;
-        config_reg->CONFIG_CE2CFG  = EMIF_CE2CFG_CONFIGVALUE;
-        config_reg->CONFIG_CE3CFG  = EMIF_CE3CFG_CONFIGVALUE;
-        config_reg->CONFIG_CE4CFG  = EMIF_CE4CFG_CONFIGVALUE;
-        config_reg->CONFIG_CE5CFG  = EMIF_CE5CFG_CONFIGVALUE;
-        config_reg->CONFIG_SDTIMR  = EMIF_SDTIMR_CONFIGVALUE;
-        config_reg->CONFIG_SDSRETR = EMIF_SDSRETR_CONFIGVALUE;
-        config_reg->CONFIG_INTMSK  = EMIF_INTMSK_CONFIGVALUE;
-        config_reg->CONFIG_PMCR    = EMIF_PMCR_CONFIGVALUE;
+//        config_reg->CONFIG_AWCC    = EMIF_AWCC_CONFIGVALUE;
+//        config_reg->CONFIG_SDCR    = EMIF_SDCR_CONFIGVALUE;
+//        config_reg->CONFIG_SDRCR   = EMIF_SDRCR_CONFIGVALUE;
+//        config_reg->CONFIG_CE2CFG  = EMIF_CE2CFG_CONFIGVALUE;
+//        config_reg->CONFIG_CE3CFG  = EMIF_CE3CFG_CONFIGVALUE;
+//        config_reg->CONFIG_CE4CFG  = EMIF_CE4CFG_CONFIGVALUE;
+//        config_reg->CONFIG_CE5CFG  = EMIF_CE5CFG_CONFIGVALUE;
+//        config_reg->CONFIG_SDTIMR  = EMIF_SDTIMR_CONFIGVALUE;
+//        config_reg->CONFIG_SDSRETR = EMIF_SDSRETR_CONFIGVALUE;
+//        config_reg->CONFIG_INTMSK  = EMIF_INTMSK_CONFIGVALUE;
+//        config_reg->CONFIG_PMCR    = EMIF_PMCR_CONFIGVALUE;
     }
     else
     {

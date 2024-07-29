@@ -383,12 +383,12 @@ void dcc1GetConfigValue(dcc_config_reg_t *config_reg, config_value_type_t type)
 {
     if (type == InitialValue)
     {
-        config_reg->CONFIG_GCTRL = DCC1_GCTRL_CONFIGVALUE;
-        config_reg->CONFIG_CNT0SEED = DCC1_CNT0SEED_CONFIGVALUE;
-        config_reg->CONFIG_VALID0SEED = DCC1_VALID0SEED_CONFIGVALUE;
-        config_reg->CONFIG_CNT1SEED = DCC1_CNT1SEED_CONFIGVALUE;
-        config_reg->CONFIG_CNT1CLKSRC = DCC1_CNT1CLKSRC_CONFIGVALUE;
-        config_reg->CONFIG_CNT0CLKSRC = DCC1_CNT0CLKSRC_CONFIGVALUE;
+//        config_reg->CONFIG_GCTRL = DCC1_GCTRL_CONFIGVALUE;
+//        config_reg->CONFIG_CNT0SEED = DCC1_CNT0SEED_CONFIGVALUE;
+//        config_reg->CONFIG_VALID0SEED = DCC1_VALID0SEED_CONFIGVALUE;
+//        config_reg->CONFIG_CNT1SEED = DCC1_CNT1SEED_CONFIGVALUE;
+//        config_reg->CONFIG_CNT1CLKSRC = DCC1_CNT1CLKSRC_CONFIGVALUE;
+//        config_reg->CONFIG_CNT0CLKSRC = DCC1_CNT0CLKSRC_CONFIGVALUE;
     }
     else
     {
@@ -420,12 +420,12 @@ void dcc2GetConfigValue(dcc_config_reg_t *config_reg, config_value_type_t type)
 {
     if (type == InitialValue)
     {
-        config_reg->CONFIG_GCTRL = DCC2_GCTRL_CONFIGVALUE;
-        config_reg->CONFIG_CNT0SEED = DCC2_CNT0SEED_CONFIGVALUE;
-        config_reg->CONFIG_VALID0SEED = DCC2_VALID0SEED_CONFIGVALUE;
-        config_reg->CONFIG_CNT1SEED = DCC2_CNT1SEED_CONFIGVALUE;
-        config_reg->CONFIG_CNT1CLKSRC = DCC2_CNT1CLKSRC_CONFIGVALUE;
-        config_reg->CONFIG_CNT0CLKSRC = DCC2_CNT0CLKSRC_CONFIGVALUE;
+//        config_reg->CONFIG_GCTRL = DCC2_GCTRL_CONFIGVALUE;
+//        config_reg->CONFIG_CNT0SEED = DCC2_CNT0SEED_CONFIGVALUE;
+//        config_reg->CONFIG_VALID0SEED = DCC2_VALID0SEED_CONFIGVALUE;
+//        config_reg->CONFIG_CNT1SEED = DCC2_CNT1SEED_CONFIGVALUE;
+//        config_reg->CONFIG_CNT1CLKSRC = DCC2_CNT1CLKSRC_CONFIGVALUE;
+//        config_reg->CONFIG_CNT0CLKSRC = DCC2_CNT0CLKSRC_CONFIGVALUE;
     }
     else
     {

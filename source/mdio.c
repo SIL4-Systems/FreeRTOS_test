@@ -98,9 +98,9 @@ boolean MDIOPhyRegRead(uint32 baseAddr, uint32 phyAddr,
 
     /* wait for command completion */
     /*SAFETYMCUSW 28 D MR:NA <APPROVED> "Hardware status bit read check" */
-//    while((HWREG(baseAddr + MDIO_USERACCESS0) & MDIO_USERACCESS0_GO) == MDIO_USERACCESS0_GO)
-//    {
-//	} /* Wait */
+    while((HWREG(baseAddr + MDIO_USERACCESS0) & MDIO_USERACCESS0_GO) == MDIO_USERACCESS0_GO)
+    { 
+	} /* Wait */
 
     /* Store the data if the read is acknowledged */
     if(((HWREG(baseAddr + MDIO_USERACCESS0)) & MDIO_USERACCESS0_ACK) == MDIO_USERACCESS0_ACK)

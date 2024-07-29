@@ -108,6 +108,7 @@
 #define configUSE_MALLOC_FAILED_HOOK  0
 
 /* USER CODE BEGIN (1) */
+#define ipconfigNUM_NETWORK_BUFFER_DESCRIPTORS  60 // Adjust as necessary
 /* USER CODE END */
 
 #define configSUPPORT_STATIC_ALLOCATION			0

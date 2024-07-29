@@ -385,7 +385,7 @@ typedef struct system_config_reg
 #define SYS2_PLLCTL3_CONFIGVALUE_2  (((SYS2_PLLCTL3_CONFIGVALUE_1) & 0xE0FFFFFFU) | (uint32)((uint32)(1U - 1U) << 24U))
 #define SYS2_STCCLKDIV_CONFIGVALUE  0U
 #define SYS2_CLK2CNTL_CONFIGVALUE   (1U | 0x00000100U)
-#define SYS2_VCLKACON1_CONFIGVALUE  ( (uint32)((uint32)1U << 24U) \
+#define SYS2_VCLKACON1_CONFIGVALUE  ( (uint32)((uint32)2U << 24U) \
                                     | (uint32)((uint32)1U << 20U) \
                                     | (uint32)((uint32)SYS_VCLK << 16U)\
                                     | (uint32)((uint32)1U << 8U)\

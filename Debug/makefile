@@ -28,9 +28,11 @@ ORDERED_OBJS += \
 "./source/eqep.obj" \
 "./source/errata_SSWF021_45.obj" \
 "./source/esm.obj" \
+"./source/eth.obj" \
 "./source/etpwm.obj" \
 "./source/eventhandler.obj" \
 "./source/gio.obj" \
+"./source/helpers.obj" \
 "./source/het.obj" \
 "./source/i2c.obj" \
 "./source/lin.obj" \
@@ -67,6 +69,7 @@ ORDERED_OBJS += \
 "./source/sys_startup.obj" \
 "./source/sys_vim.obj" \
 "./source/system.obj" \
+"./source/uart.obj" \
 "../source/sys_link.cmd" \
 $(GEN_CMDS__FLAG) \
 -lrtsv7R4_T_le_v3D16_eabi.lib \
@@ -213,10 +216,10 @@ HelloWorld_RM46.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "CustomApp\source\led_demo.obj" "FreeRTOS+UDP\source\BufferAllocation_2.obj" "FreeRTOS+UDP\source\FreeRTOS_DHCP.obj" "FreeRTOS+UDP\source\FreeRTOS_DNS.obj" "FreeRTOS+UDP\source\FreeRTOS_Sockets.obj" "FreeRTOS+UDP\source\FreeRTOS_UDP_IP.obj" "FreeRTOS+UDP\source\NetworkInterface.obj" "source\adc.obj" "source\can.obj" "source\crc.obj" "source\dabort.obj" "source\dcc.obj" "source\ecap.obj" "source\emac.obj" "source\emif.obj" "source\eqep.obj" "source\errata_SSWF021_45.obj" "source\esm.obj" "source\etpwm.obj" "source\eventhandler.obj" "source\gio.obj" "source\het.obj" "source\i2c.obj" "source\lin.obj" "source\mdio.obj" "source\mibspi.obj" "source\nandflash.obj" "source\notification.obj" "source\os_croutine.obj" "source\os_event_groups.obj" "source\os_heap.obj" "source\os_list.obj" "source\os_mpu_wrappers.obj" "source\os_port.obj" "source\os_portasm.obj" "source\os_queue.obj" "source\os_tasks.obj" "source\os_timer.obj" "source\phy_dp83640.obj" "source\pinmux.obj" "source\pom.obj" "source\rs485comm.obj" 
-	-$(RM) "source\sci.obj" "source\spi.obj" "source\sys_core.obj" "source\sys_dma.obj" "source\sys_intvecs.obj" "source\sys_main.obj" "source\sys_mpu.obj" "source\sys_pcr.obj" "source\sys_phantom.obj" "source\sys_pmm.obj" "source\sys_pmu.obj" "source\sys_selftest.obj" "source\sys_startup.obj" "source\sys_vim.obj" "source\system.obj" 
-	-$(RM) "CustomApp\source\led_demo.d" "FreeRTOS+UDP\source\BufferAllocation_2.d" "FreeRTOS+UDP\source\FreeRTOS_DHCP.d" "FreeRTOS+UDP\source\FreeRTOS_DNS.d" "FreeRTOS+UDP\source\FreeRTOS_Sockets.d" "FreeRTOS+UDP\source\FreeRTOS_UDP_IP.d" "FreeRTOS+UDP\source\NetworkInterface.d" "source\adc.d" "source\can.d" "source\crc.d" "source\dcc.d" "source\ecap.d" "source\emac.d" "source\emif.d" "source\eqep.d" "source\errata_SSWF021_45.d" "source\esm.d" "source\etpwm.d" "source\eventhandler.d" "source\gio.d" "source\het.d" "source\i2c.d" "source\lin.d" "source\mdio.d" "source\mibspi.d" "source\nandflash.d" "source\notification.d" "source\os_croutine.d" "source\os_event_groups.d" "source\os_heap.d" "source\os_list.d" "source\os_mpu_wrappers.d" "source\os_port.d" "source\os_queue.d" "source\os_tasks.d" "source\os_timer.d" "source\phy_dp83640.d" "source\pinmux.d" "source\pom.d" "source\rs485comm.d" "source\sci.d" "source\spi.d" "source\sys_dma.d" "source\sys_main.d" "source\sys_pcr.d" "source\sys_phantom.d" "source\sys_pmm.d" 
-	-$(RM) "source\sys_selftest.d" "source\sys_startup.d" "source\sys_vim.d" "source\system.d" 
+	-$(RM) "CustomApp\source\led_demo.obj" "FreeRTOS+UDP\source\BufferAllocation_2.obj" "FreeRTOS+UDP\source\FreeRTOS_DHCP.obj" "FreeRTOS+UDP\source\FreeRTOS_DNS.obj" "FreeRTOS+UDP\source\FreeRTOS_Sockets.obj" "FreeRTOS+UDP\source\FreeRTOS_UDP_IP.obj" "FreeRTOS+UDP\source\NetworkInterface.obj" "source\adc.obj" "source\can.obj" "source\crc.obj" "source\dabort.obj" "source\dcc.obj" "source\ecap.obj" "source\emac.obj" "source\emif.obj" "source\eqep.obj" "source\errata_SSWF021_45.obj" "source\esm.obj" "source\eth.obj" "source\etpwm.obj" "source\eventhandler.obj" "source\gio.obj" "source\helpers.obj" "source\het.obj" "source\i2c.obj" "source\lin.obj" "source\mdio.obj" "source\mibspi.obj" "source\nandflash.obj" "source\notification.obj" "source\os_croutine.obj" "source\os_event_groups.obj" "source\os_heap.obj" "source\os_list.obj" "source\os_mpu_wrappers.obj" "source\os_port.obj" "source\os_portasm.obj" "source\os_queue.obj" "source\os_tasks.obj" "source\os_timer.obj" "source\phy_dp83640.obj" "source\pinmux.obj" 
+	-$(RM) "source\pom.obj" "source\rs485comm.obj" "source\sci.obj" "source\spi.obj" "source\sys_core.obj" "source\sys_dma.obj" "source\sys_intvecs.obj" "source\sys_main.obj" "source\sys_mpu.obj" "source\sys_pcr.obj" "source\sys_phantom.obj" "source\sys_pmm.obj" "source\sys_pmu.obj" "source\sys_selftest.obj" "source\sys_startup.obj" "source\sys_vim.obj" "source\system.obj" "source\uart.obj" 
+	-$(RM) "CustomApp\source\led_demo.d" "FreeRTOS+UDP\source\BufferAllocation_2.d" "FreeRTOS+UDP\source\FreeRTOS_DHCP.d" "FreeRTOS+UDP\source\FreeRTOS_DNS.d" "FreeRTOS+UDP\source\FreeRTOS_Sockets.d" "FreeRTOS+UDP\source\FreeRTOS_UDP_IP.d" "FreeRTOS+UDP\source\NetworkInterface.d" "source\adc.d" "source\can.d" "source\crc.d" "source\dcc.d" "source\ecap.d" "source\emac.d" "source\emif.d" "source\eqep.d" "source\errata_SSWF021_45.d" "source\esm.d" "source\eth.d" "source\etpwm.d" "source\eventhandler.d" "source\gio.d" "source\helpers.d" "source\het.d" "source\i2c.d" "source\lin.d" "source\mdio.d" "source\mibspi.d" "source\nandflash.d" "source\notification.d" "source\os_croutine.d" "source\os_event_groups.d" "source\os_heap.d" "source\os_list.d" "source\os_mpu_wrappers.d" "source\os_port.d" "source\os_queue.d" "source\os_tasks.d" "source\os_timer.d" "source\phy_dp83640.d" "source\pinmux.d" "source\pom.d" "source\rs485comm.d" "source\sci.d" "source\spi.d" "source\sys_dma.d" "source\sys_main.d" "source\sys_pcr.d" 
+	-$(RM) "source\sys_phantom.d" "source\sys_pmm.d" "source\sys_selftest.d" "source\sys_startup.d" "source\sys_vim.d" "source\system.d" "source\uart.d" 
 	-$(RM) "source\dabort.d" "source\os_portasm.d" "source\sys_core.d" "source\sys_intvecs.d" "source\sys_mpu.d" "source\sys_pmu.d" 
 	-@echo 'Finished clean'
 	-@echo ' '

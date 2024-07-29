@@ -44,8 +44,6 @@ source/system.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/sys_pcr.h
 source/system.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/reg_pcr.h
 source/system.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/pinmux.h
 source/system.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/reg_pinmux.h
-source/system.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/emif.h
-source/system.obj: D:/SIL4/repos/TI/HelloWorld_RM46/include/reg_emif.h
 
 ../source/system.c:
 
@@ -134,8 +132,4 @@ D:/SIL4/repos/TI/HelloWorld_RM46/include/reg_pcr.h:
 D:/SIL4/repos/TI/HelloWorld_RM46/include/pinmux.h:
 
 D:/SIL4/repos/TI/HelloWorld_RM46/include/reg_pinmux.h:
-
-D:/SIL4/repos/TI/HelloWorld_RM46/include/emif.h:
-
-D:/SIL4/repos/TI/HelloWorld_RM46/include/reg_emif.h:
 

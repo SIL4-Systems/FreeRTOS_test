@@ -3210,19 +3210,19 @@ void het1GetConfigValue(het_config_reg_t *config_reg, config_value_type_t type)
 {
     if (type == InitialValue)
     {
-        config_reg->CONFIG_GCR     = HET1_GCR_CONFIGVALUE;
-        config_reg->CONFIG_PFR     = HET1_PFR_CONFIGVALUE;
-        config_reg->CONFIG_INTENAS = HET1_INTENAS_CONFIGVALUE;
-        config_reg->CONFIG_INTENAC = HET1_INTENAC_CONFIGVALUE;
-        config_reg->CONFIG_PRY     = HET1_PRY_CONFIGVALUE;
-        config_reg->CONFIG_AND     = HET1_AND_CONFIGVALUE;
-        config_reg->CONFIG_HRSH    = HET1_HRSH_CONFIGVALUE;
-        config_reg->CONFIG_XOR     = HET1_XOR_CONFIGVALUE;
-        config_reg->CONFIG_DIR     = HET1_DIR_CONFIGVALUE;
-        config_reg->CONFIG_PDR     = HET1_PDR_CONFIGVALUE;
-        config_reg->CONFIG_PULDIS  = HET1_PULDIS_CONFIGVALUE;
-        config_reg->CONFIG_PSL     = HET1_PSL_CONFIGVALUE;
-        config_reg->CONFIG_PCR     = HET1_PCR_CONFIGVALUE;
+//        config_reg->CONFIG_GCR     = HET1_GCR_CONFIGVALUE;
+//        config_reg->CONFIG_PFR     = HET1_PFR_CONFIGVALUE;
+//        config_reg->CONFIG_INTENAS = HET1_INTENAS_CONFIGVALUE;
+//        config_reg->CONFIG_INTENAC = HET1_INTENAC_CONFIGVALUE;
+//        config_reg->CONFIG_PRY     = HET1_PRY_CONFIGVALUE;
+//        config_reg->CONFIG_AND     = HET1_AND_CONFIGVALUE;
+//        config_reg->CONFIG_HRSH    = HET1_HRSH_CONFIGVALUE;
+//        config_reg->CONFIG_XOR     = HET1_XOR_CONFIGVALUE;
+//        config_reg->CONFIG_DIR     = HET1_DIR_CONFIGVALUE;
+//        config_reg->CONFIG_PDR     = HET1_PDR_CONFIGVALUE;
+//        config_reg->CONFIG_PULDIS  = HET1_PULDIS_CONFIGVALUE;
+//        config_reg->CONFIG_PSL     = HET1_PSL_CONFIGVALUE;
+//        config_reg->CONFIG_PCR     = HET1_PCR_CONFIGVALUE;
     }
     else
     {
@@ -3265,19 +3265,19 @@ void het2GetConfigValue(het_config_reg_t *config_reg, config_value_type_t type)
 {
     if (type == InitialValue)
     {
-        config_reg->CONFIG_GCR     = HET2_GCR_CONFIGVALUE;
-        config_reg->CONFIG_PFR     = HET2_PFR_CONFIGVALUE;
-        config_reg->CONFIG_INTENAS = HET2_INTENAS_CONFIGVALUE;
-        config_reg->CONFIG_INTENAC = HET2_INTENAC_CONFIGVALUE;
-        config_reg->CONFIG_PRY     = HET2_PRY_CONFIGVALUE;
-        config_reg->CONFIG_AND     = HET2_AND_CONFIGVALUE;
-        config_reg->CONFIG_HRSH    = HET2_HRSH_CONFIGVALUE;
-        config_reg->CONFIG_XOR     = HET2_XOR_CONFIGVALUE;
-        config_reg->CONFIG_DIR     = HET2_DIR_CONFIGVALUE;
-        config_reg->CONFIG_PDR     = HET2_PDR_CONFIGVALUE;
-        config_reg->CONFIG_PULDIS  = HET2_PULDIS_CONFIGVALUE;
-        config_reg->CONFIG_PSL     = HET2_PSL_CONFIGVALUE;
-        config_reg->CONFIG_PCR     = HET2_PCR_CONFIGVALUE;
+//        config_reg->CONFIG_GCR     = HET2_GCR_CONFIGVALUE;
+//        config_reg->CONFIG_PFR     = HET2_PFR_CONFIGVALUE;
+//        config_reg->CONFIG_INTENAS = HET2_INTENAS_CONFIGVALUE;
+//        config_reg->CONFIG_INTENAC = HET2_INTENAC_CONFIGVALUE;
+//        config_reg->CONFIG_PRY     = HET2_PRY_CONFIGVALUE;
+//        config_reg->CONFIG_AND     = HET2_AND_CONFIGVALUE;
+//        config_reg->CONFIG_HRSH    = HET2_HRSH_CONFIGVALUE;
+//        config_reg->CONFIG_XOR     = HET2_XOR_CONFIGVALUE;
+//        config_reg->CONFIG_DIR     = HET2_DIR_CONFIGVALUE;
+//        config_reg->CONFIG_PDR     = HET2_PDR_CONFIGVALUE;
+//        config_reg->CONFIG_PULDIS  = HET2_PULDIS_CONFIGVALUE;
+//        config_reg->CONFIG_PSL     = HET2_PSL_CONFIGVALUE;
+//        config_reg->CONFIG_PCR     = HET2_PCR_CONFIGVALUE;
     }
     else
     {

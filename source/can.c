@@ -1472,17 +1472,17 @@ void can1GetConfigValue(can_config_reg_t *config_reg, config_value_type_t type)
 {
     if (type == InitialValue)
     {
-        config_reg->CONFIG_CTL     = CAN1_CTL_CONFIGVALUE;    
-        config_reg->CONFIG_ES      = CAN1_ES_CONFIGVALUE;     
-        config_reg->CONFIG_BTR     = CAN1_BTR_CONFIGVALUE;    
-        config_reg->CONFIG_TEST    = CAN1_TEST_CONFIGVALUE;   
-        config_reg->CONFIG_ABOTR   = CAN1_ABOTR_CONFIGVALUE;  
-        config_reg->CONFIG_INTMUX0 = CAN1_INTMUX0_CONFIGVALUE;
-        config_reg->CONFIG_INTMUX1 = CAN1_INTMUX2_CONFIGVALUE;
-        config_reg->CONFIG_INTMUX2 = CAN1_INTMUX2_CONFIGVALUE;
-        config_reg->CONFIG_INTMUX3 = CAN1_INTMUX3_CONFIGVALUE;
-        config_reg->CONFIG_TIOC    = CAN1_TIOC_CONFIGVALUE;   
-        config_reg->CONFIG_RIOC    = CAN1_RIOC_CONFIGVALUE;    
+//        config_reg->CONFIG_CTL     = CAN1_CTL_CONFIGVALUE;
+//        config_reg->CONFIG_ES      = CAN1_ES_CONFIGVALUE;
+//        config_reg->CONFIG_BTR     = CAN1_BTR_CONFIGVALUE;
+//        config_reg->CONFIG_TEST    = CAN1_TEST_CONFIGVALUE;
+//        config_reg->CONFIG_ABOTR   = CAN1_ABOTR_CONFIGVALUE;
+//        config_reg->CONFIG_INTMUX0 = CAN1_INTMUX0_CONFIGVALUE;
+//        config_reg->CONFIG_INTMUX1 = CAN1_INTMUX2_CONFIGVALUE;
+//        config_reg->CONFIG_INTMUX2 = CAN1_INTMUX2_CONFIGVALUE;
+//        config_reg->CONFIG_INTMUX3 = CAN1_INTMUX3_CONFIGVALUE;
+//        config_reg->CONFIG_TIOC    = CAN1_TIOC_CONFIGVALUE;
+//        config_reg->CONFIG_RIOC    = CAN1_RIOC_CONFIGVALUE;
     }
     else
     {
@@ -1522,17 +1522,17 @@ void can2GetConfigValue(can_config_reg_t *config_reg, config_value_type_t type)
 {
     if (type == InitialValue)
     {
-        config_reg->CONFIG_CTL     = CAN2_CTL_CONFIGVALUE;    
-        config_reg->CONFIG_ES      = CAN2_ES_CONFIGVALUE;     
-        config_reg->CONFIG_BTR     = CAN2_BTR_CONFIGVALUE;    
-        config_reg->CONFIG_TEST    = CAN2_TEST_CONFIGVALUE;   
-        config_reg->CONFIG_ABOTR   = CAN2_ABOTR_CONFIGVALUE;  
-        config_reg->CONFIG_INTMUX0 = CAN2_INTMUX0_CONFIGVALUE;
-        config_reg->CONFIG_INTMUX1 = CAN2_INTMUX2_CONFIGVALUE;
-        config_reg->CONFIG_INTMUX2 = CAN2_INTMUX2_CONFIGVALUE;
-        config_reg->CONFIG_INTMUX3 = CAN2_INTMUX3_CONFIGVALUE;
-        config_reg->CONFIG_TIOC    = CAN2_TIOC_CONFIGVALUE;   
-        config_reg->CONFIG_RIOC    = CAN2_RIOC_CONFIGVALUE;    
+//        config_reg->CONFIG_CTL     = CAN2_CTL_CONFIGVALUE;
+//        config_reg->CONFIG_ES      = CAN2_ES_CONFIGVALUE;
+//        config_reg->CONFIG_BTR     = CAN2_BTR_CONFIGVALUE;
+//        config_reg->CONFIG_TEST    = CAN2_TEST_CONFIGVALUE;
+//        config_reg->CONFIG_ABOTR   = CAN2_ABOTR_CONFIGVALUE;
+//        config_reg->CONFIG_INTMUX0 = CAN2_INTMUX0_CONFIGVALUE;
+//        config_reg->CONFIG_INTMUX1 = CAN2_INTMUX2_CONFIGVALUE;
+//        config_reg->CONFIG_INTMUX2 = CAN2_INTMUX2_CONFIGVALUE;
+//        config_reg->CONFIG_INTMUX3 = CAN2_INTMUX3_CONFIGVALUE;
+//        config_reg->CONFIG_TIOC    = CAN2_TIOC_CONFIGVALUE;
+//        config_reg->CONFIG_RIOC    = CAN2_RIOC_CONFIGVALUE;
     }
     else
     {
@@ -1572,17 +1572,17 @@ void can3GetConfigValue(can_config_reg_t *config_reg, config_value_type_t type)
 {
     if (type == InitialValue)
     {
-        config_reg->CONFIG_CTL     = CAN3_CTL_CONFIGVALUE;    
-        config_reg->CONFIG_ES      = CAN3_ES_CONFIGVALUE;     
-        config_reg->CONFIG_BTR     = CAN3_BTR_CONFIGVALUE;    
-        config_reg->CONFIG_TEST    = CAN3_TEST_CONFIGVALUE;   
-        config_reg->CONFIG_ABOTR   = CAN3_ABOTR_CONFIGVALUE;  
-        config_reg->CONFIG_INTMUX0 = CAN3_INTMUX0_CONFIGVALUE;
-        config_reg->CONFIG_INTMUX1 = CAN3_INTMUX2_CONFIGVALUE;
-        config_reg->CONFIG_INTMUX2 = CAN3_INTMUX2_CONFIGVALUE;
-        config_reg->CONFIG_INTMUX3 = CAN3_INTMUX3_CONFIGVALUE;
-        config_reg->CONFIG_TIOC    = CAN3_TIOC_CONFIGVALUE;   
-        config_reg->CONFIG_RIOC    = CAN3_RIOC_CONFIGVALUE;    
+//        config_reg->CONFIG_CTL     = CAN3_CTL_CONFIGVALUE;
+//        config_reg->CONFIG_ES      = CAN3_ES_CONFIGVALUE;
+//        config_reg->CONFIG_BTR     = CAN3_BTR_CONFIGVALUE;
+//        config_reg->CONFIG_TEST    = CAN3_TEST_CONFIGVALUE;
+//        config_reg->CONFIG_ABOTR   = CAN3_ABOTR_CONFIGVALUE;
+//        config_reg->CONFIG_INTMUX0 = CAN3_INTMUX0_CONFIGVALUE;
+//        config_reg->CONFIG_INTMUX1 = CAN3_INTMUX2_CONFIGVALUE;
+//        config_reg->CONFIG_INTMUX2 = CAN3_INTMUX2_CONFIGVALUE;
+//        config_reg->CONFIG_INTMUX3 = CAN3_INTMUX3_CONFIGVALUE;
+//        config_reg->CONFIG_TIOC    = CAN3_TIOC_CONFIGVALUE;
+//        config_reg->CONFIG_RIOC    = CAN3_RIOC_CONFIGVALUE;
     }
     else
     {

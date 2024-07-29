@@ -69,6 +69,9 @@ void vApplicationIPNetworkEventHook( eIPCallbackEvent_t eNetworkEvent )
     }
 }
 
+#define ETHERNET_HEADER_LEN 14
+#define ETHERNET_TYPE_IPv4 0x0800
+#define PAYLOAD_LEN 86
 
 /**
  * @brief     This function is called by Ethernet task as task entry
@@ -119,10 +122,44 @@ void EthernetTask(void *pvParameters) {
 
     UARTwrite( "Ethernet Ready...\n", strlen( "Ethernet Ready...\n" ) );
 
+    int i = 0;
+    uint8_t sending[100];
+
+    struct freertos_sockaddr addr;
+    addr.sin_port = 80;
+    addr.sin_addr = 0xffffffff;
+
+    // Define some dummy payload data
+    uint8_t payload[86] = "This is some dummy data to fill the Ethernet frame payload.";
+
+    // Define source MAC address (example: 00:11:22:33:44:55)
+    uint8_t src_mac[6] = {0x00U, 0x08U, 0xEEU, 0x03U, 0xA6U, 0x6CU};
+
+    // Define destination MAC address as broadcast
+    uint8_t dest_mac[6] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
+
+    // Copy destination MAC address
+    memcpy(sending, dest_mac, 6);
+    // Copy source MAC address
+    memcpy(sending + 6, src_mac, 6);
+    // Set Ethernet type to IPv4 (0x0800)
+    sending[12] = (ETHERNET_TYPE_IPv4 >> 8) & 0xFF;
+    sending[13] = ETHERNET_TYPE_IPv4 & 0xFF;
+    // Copy payload data
+    memcpy(sending + ETHERNET_HEADER_LEN, payload, PAYLOAD_LEN);
+
+    for ( ;; ) {
+        FreeRTOS_sendto( xSocket, sending, 100, 0, &addr, sizeof(addr) );
+        UARTwrite("Sent!\n", 6);
+
+//        i = 2000000;
+//        while (i-- > 0);
+    }
+
     for( ;; )
     {
         // Wait for incoming data
-        lRecvBytes = FreeRTOS_recvfrom( xSocket, ucRecvBuffer, sizeof( ucRecvBuffer ), 0, &xSourceAddress, &xSourceAddressLength );
+        lRecvBytes = FreeRTOS_recvfrom( xSocket, ucRecvBuffer, sizeof( ucRecvBuffer ), 100, &xSourceAddress, &xSourceAddressLength );
 
         if( lRecvBytes > 0 )
         {
@@ -164,7 +201,7 @@ OUTPUTS                 :
 FUNCTION CALLED BY      : xTaskCreate()
 FUNCTION CALLING        :
 ******************************************************************************/
-//static void EthernetTask(  )
+//void EthernetTask( void *pvParameters )
 //{
 //    UARTwrite("Ethernet starting...\n",strlen("Ethernet starting...\n"));
 //    int i = 0;
@@ -247,27 +284,27 @@ FUNCTION CALLING        :
 //            case 25:
 //                //Dump current data
 //                //UARTwrite("Building Packet\n",strlen("Building Packet\n"));
-//                sprintf(outBuf, "Decoded MCL: Not implemented\n");
-//                sprintf(outBuf+strlen(outBuf), "Calculated Target BC Voltage: Not implemented\n");
-//                sprintf(outBuf+strlen(outBuf), "Firmware version: 2.03\n");
-//                sprintf(outBuf+strlen(outBuf), "Input 1: %X\n", ethReadEmifLocation(EMIF_DIN1));
-//                sprintf(outBuf+strlen(outBuf), "Input 2: %X\n", ethReadEmifLocation(EMIF_DIN2));
-//                sprintf(outBuf+strlen(outBuf), "Output: %X\n", ethReadEmifLocation(EMIF_OUT));
-//                sprintf(outBuf+strlen(outBuf), "Tach 1 (Hz): %d\n", ethReadEmifLocation(EMIF_TACH1));
-//                sprintf(outBuf+strlen(outBuf), "Tach 2 (Hz): %d\n", ethReadEmifLocation(EMIF_TACH2));
-//                sprintf(outBuf+strlen(outBuf), "Tach 3 (Hz): %d\n", ethReadEmifLocation(EMIF_TACH3));
-//                sprintf(outBuf+strlen(outBuf), "Tach 4 (Hz): %d\n", ethReadEmifLocation(EMIF_TACH4));
-//                sprintf(outBuf+strlen(outBuf), "FPGA Version: %X\n", ethReadEmifLocation(EMIF_VERSION));
-//                sprintf(outBuf+strlen(outBuf), "LED 1: %X\n", ethReadEmifLocation(EMIF_LED1));
-//                sprintf(outBuf+strlen(outBuf), "LED 2: %X\n", ethReadEmifLocation(EMIF_LED2));
-//                sprintf(outBuf+strlen(outBuf), "AIN 1: %X\n", ethReadEmifLocation(EMIF_AIN1));
-//                //sprintf(outBuf+strlen(outBuf), "AIN 2: %X\n", ethReadEmifLocation(EMIF_AIN2));
-//                sprintf(outBuf+strlen(outBuf), "AIN 2: %X\n", ethReadEmifLocation(EMIF_AIN4));
-//                sprintf(outBuf+strlen(outBuf), "AIN 3: %X\n", ethReadEmifLocation(EMIF_AIN3));
-//                //sprintf(outBuf+strlen(outBuf), "AIN 4: %X\n", ethReadEmifLocation(EMIF_AIN4));
-//                sprintf(outBuf+strlen(outBuf), "AIN 4: %X\n", ethReadEmifLocation(EMIF_AIN2));
-//                sprintf(outBuf+strlen(outBuf), "Scratch: %X\n", ethReadEmifLocation(EMIF_SCRATCH));
-//                sprintf(outBuf+strlen(outBuf), "Timer: %d\n", ethReadEmifLocation(EMIF_TIMER));
+////                sprintf(outBuf, "Decoded MCL: Not implemented\n");
+////                sprintf(outBuf+strlen(outBuf), "Calculated Target BC Voltage: Not implemented\n");
+////                sprintf(outBuf+strlen(outBuf), "Firmware version: 2.03\n");
+////                sprintf(outBuf+strlen(outBuf), "Input 1: %X\n", ethReadEmifLocation(EMIF_DIN1));
+////                sprintf(outBuf+strlen(outBuf), "Input 2: %X\n", ethReadEmifLocation(EMIF_DIN2));
+////                sprintf(outBuf+strlen(outBuf), "Output: %X\n", ethReadEmifLocation(EMIF_OUT));
+////                sprintf(outBuf+strlen(outBuf), "Tach 1 (Hz): %d\n", ethReadEmifLocation(EMIF_TACH1));
+////                sprintf(outBuf+strlen(outBuf), "Tach 2 (Hz): %d\n", ethReadEmifLocation(EMIF_TACH2));
+////                sprintf(outBuf+strlen(outBuf), "Tach 3 (Hz): %d\n", ethReadEmifLocation(EMIF_TACH3));
+////                sprintf(outBuf+strlen(outBuf), "Tach 4 (Hz): %d\n", ethReadEmifLocation(EMIF_TACH4));
+////                sprintf(outBuf+strlen(outBuf), "FPGA Version: %X\n", ethReadEmifLocation(EMIF_VERSION));
+////                sprintf(outBuf+strlen(outBuf), "LED 1: %X\n", ethReadEmifLocation(EMIF_LED1));
+////                sprintf(outBuf+strlen(outBuf), "LED 2: %X\n", ethReadEmifLocation(EMIF_LED2));
+////                sprintf(outBuf+strlen(outBuf), "AIN 1: %X\n", ethReadEmifLocation(EMIF_AIN1));
+////                //sprintf(outBuf+strlen(outBuf), "AIN 2: %X\n", ethReadEmifLocation(EMIF_AIN2));
+////                sprintf(outBuf+strlen(outBuf), "AIN 2: %X\n", ethReadEmifLocation(EMIF_AIN4));
+////                sprintf(outBuf+strlen(outBuf), "AIN 3: %X\n", ethReadEmifLocation(EMIF_AIN3));
+////                //sprintf(outBuf+strlen(outBuf), "AIN 4: %X\n", ethReadEmifLocation(EMIF_AIN4));
+////                sprintf(outBuf+strlen(outBuf), "AIN 4: %X\n", ethReadEmifLocation(EMIF_AIN2));
+////                sprintf(outBuf+strlen(outBuf), "Scratch: %X\n", ethReadEmifLocation(EMIF_SCRATCH));
+////                sprintf(outBuf+strlen(outBuf), "Timer: %d\n", ethReadEmifLocation(EMIF_TIMER));
 //                //UARTwrite("Sending\n",strlen("Sending\n"));
 //                FreeRTOS_sendto(sock,outBuf,strlen(outBuf),0,&sendAddr,sizeof(sendAddr));
 //                //UARTwrite("Sent\n",strlen("Sent\n"));
@@ -276,124 +313,124 @@ FUNCTION CALLING        :
 //
 //                break;
 //            case 35: //live data
-//                while(inBuf[0] != 36){
-//                    //make delay of 10 ms between sending data
-//                    output_length = sprintf(outBuf, "%c%c%c%c%c%c%c", 1,1,1,1,1,1,1);
-//                    tempData = ethReadEmifLocation(EMIF_OUT);
-//                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[1], ((char*)(&tempData))[0]);
-//                    tempData = ethReadEmifLocation(EMIF_TACH1);
-//                    //tempData = (tempData/100);
-//                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[1], ((char*)(&tempData))[0]);
-//                    tempData = ethReadEmifLocation(EMIF_TACH2);
-//                    //tempData = (tempData/100);
-//                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[1], ((char*)(&tempData))[0]);
-//                    output_length += sprintf(outBuf + output_length, "111122223333");
-//                    tempData = ethReadEmifLocation(EMIF_DIN1);
-//                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[1], ((char*)(&tempData))[0]);
-//                    tempData = ethReadEmifLocation(EMIF_DIN2);
-//                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[1], ((char*)(&tempData))[0]);
-//                    tempData = ethReadEmifLocation(EMIF_AIN1);
-//                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[1], ((char*)(&tempData))[0]);
-//                    tempData = ethReadEmifLocation(EMIF_AIN4);
-//                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[1], ((char*)(&tempData))[0]);
-//                    tempData = ethReadEmifLocation(EMIF_AIN3);
-//                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[1], ((char*)(&tempData))[0]);
-//                    tempData = ethReadEmifLocation(EMIF_AIN2);
-//                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[1], ((char*)(&tempData))[0]);
-//                    output_length += sprintf(outBuf + output_length, "111");
-//                    output_length += sprintf(outBuf + output_length, "VV"); //voltage count
-//                    output_length += sprintf(outBuf + output_length, "1"); //whatever 0x30005000[0] is on the coldfire board
-//                    output_length += sprintf(outBuf + output_length, "11111111111111");
-//                    tempData = ethReadEmifLocation(EMIF_TACH3);
-//                    //tempData = (tempData/100);
-//                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[0], ((char*)(&tempData))[1]);
-//                    tempData = ethReadEmifLocation(EMIF_TACH4);
-//                    //tempData = (tempData/100);
-//                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[0], ((char*)(&tempData))[1]);
-//                    tempData = ethReadEmifLocation(EMIF_AIN4);
-//                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[0], ((char*)(&tempData))[1]);
-//                    FreeRTOS_sendto(sock,outBuf,output_length,0,&sendAddr,sizeof(sendAddr));
-//                    if ((iReturned = FreeRTOS_recvfrom(sock, inBuf, 100, 0, &sourceAddr, sizeof(sourceAddr))) < 0){
-//
-//                    }else{
-//                        if(inBuf[0] > 0 && inBuf[0] < 20){
-//                            //activate manual control of outputs (overriding brake control algo)
-//                            ethSetManualControl(EMIF_MANUAL_ON);
-//                        }else{
-//                            //deactivate manual control of outputs
-//                            ethSetManualControl(EMIF_MANUAL_OFF);
-//                        }
-//
-//                        switch(inBuf[0]){
-//                            case 1:
-//                                ethSetManualControl(EMIF_APPLY_ON);
-//                                break;
-//                            case 2:
-//                                ethSetManualControl(EMIF_APPLY_ON);
-//                                break;
-//                            case 3:
-//                                ethSetManualControl(EMIF_RELEASE_ON);
-//                                break;
-//                            case 4:
-//                                ethSetManualControl(EMIF_RELEASE_ON);
-//                                break;
-//                            case 5:
-//                                ethSetManualControl(EMIF_ADUMP_ON);
-//                                break;
-//                            case 6:
-//                                ethSetManualControl(EMIF_ADUMP_ON);
-//                                break;
-//                            case 7:
-//                                ethSetManualControl(EMIF_BDUMP_ON);
-//                                break;
-//                            case 8:
-//                                ethSetManualControl(EMIF_BDUMP_ON);
-//                                break;
-//                            case 9:
-//                                ethSetManualControl(EMIF_WSS_ON);
-//                                break;
-//                            case 10:
-//                                ethSetManualControl(EMIF_WSS_ON);
-//                                break;
-//                            case 11:
-//                                ethSetManualControl(EMIF_APPLY_OFF);
-//                                break;
-//                            case 12:
-//                                ethSetManualControl(EMIF_RELEASE_OFF);
-//                                break;
-//                            case 13:
-//                                ethSetManualControl(EMIF_ADUMP_OFF);
-//                                break;
-//                            case 14:
-//                                ethSetManualControl(EMIF_BDUMP_OFF);
-//                                break;
-//                            case 15:
-//                                ethSetManualControl(EMIF_WSS_OFF);
-//                                break;
-//                            case 16:
-//                                ethSetManualControl(EMIF_SCO_ON);
-//                                break;
-//                            case 17:
-//                                ethSetManualControl(EMIF_SCO_OFF);
-//                                break;
-//                            case 18:
-//                                ethSetManualControl(EMIF_FAULT_ON);
-//                                break;
-//                            case 19:
-//                                ethSetManualControl(EMIF_FAULT_OFF);
-//                                break;
-//                        }
-//
-//                        if(inBuf[0] != 19){
-//                            //energize brake fault output
-//                            ethSetManualControl(EMIF_FAULT_ON);
-//                        }
-//                    }
-//                }
-//                break;
+////                while(inBuf[0] != 36){
+////                    //make delay of 10 ms between sending data
+////                    output_length = sprintf(outBuf, "%c%c%c%c%c%c%c", 1,1,1,1,1,1,1);
+////                    tempData = ethReadEmifLocation(EMIF_OUT);
+////                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[1], ((char*)(&tempData))[0]);
+////                    tempData = ethReadEmifLocation(EMIF_TACH1);
+////                    //tempData = (tempData/100);
+////                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[1], ((char*)(&tempData))[0]);
+////                    tempData = ethReadEmifLocation(EMIF_TACH2);
+////                    //tempData = (tempData/100);
+////                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[1], ((char*)(&tempData))[0]);
+////                    output_length += sprintf(outBuf + output_length, "111122223333");
+////                    tempData = ethReadEmifLocation(EMIF_DIN1);
+////                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[1], ((char*)(&tempData))[0]);
+////                    tempData = ethReadEmifLocation(EMIF_DIN2);
+////                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[1], ((char*)(&tempData))[0]);
+////                    tempData = ethReadEmifLocation(EMIF_AIN1);
+////                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[1], ((char*)(&tempData))[0]);
+////                    tempData = ethReadEmifLocation(EMIF_AIN4);
+////                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[1], ((char*)(&tempData))[0]);
+////                    tempData = ethReadEmifLocation(EMIF_AIN3);
+////                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[1], ((char*)(&tempData))[0]);
+////                    tempData = ethReadEmifLocation(EMIF_AIN2);
+////                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[1], ((char*)(&tempData))[0]);
+////                    output_length += sprintf(outBuf + output_length, "111");
+////                    output_length += sprintf(outBuf + output_length, "VV"); //voltage count
+////                    output_length += sprintf(outBuf + output_length, "1"); //whatever 0x30005000[0] is on the coldfire board
+////                    output_length += sprintf(outBuf + output_length, "11111111111111");
+////                    tempData = ethReadEmifLocation(EMIF_TACH3);
+////                    //tempData = (tempData/100);
+////                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[0], ((char*)(&tempData))[1]);
+////                    tempData = ethReadEmifLocation(EMIF_TACH4);
+////                    //tempData = (tempData/100);
+////                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[0], ((char*)(&tempData))[1]);
+////                    tempData = ethReadEmifLocation(EMIF_AIN4);
+////                    output_length += sprintf(outBuf + output_length, "%c%c", ((char*)(&tempData))[0], ((char*)(&tempData))[1]);
+////                    FreeRTOS_sendto(sock,outBuf,output_length,0,&sendAddr,sizeof(sendAddr));
+////                    if ((iReturned = FreeRTOS_recvfrom(sock, inBuf, 100, 0, &sourceAddr, sizeof(sourceAddr))) < 0){
+////
+////                    }else{
+////                        if(inBuf[0] > 0 && inBuf[0] < 20){
+////                            //activate manual control of outputs (overriding brake control algo)
+////                            ethSetManualControl(EMIF_MANUAL_ON);
+////                        }else{
+////                            //deactivate manual control of outputs
+////                            ethSetManualControl(EMIF_MANUAL_OFF);
+////                        }
+////
+////                        switch(inBuf[0]){
+////                            case 1:
+////                                ethSetManualControl(EMIF_APPLY_ON);
+////                                break;
+////                            case 2:
+////                                ethSetManualControl(EMIF_APPLY_ON);
+////                                break;
+////                            case 3:
+////                                ethSetManualControl(EMIF_RELEASE_ON);
+////                                break;
+////                            case 4:
+////                                ethSetManualControl(EMIF_RELEASE_ON);
+////                                break;
+////                            case 5:
+////                                ethSetManualControl(EMIF_ADUMP_ON);
+////                                break;
+////                            case 6:
+////                                ethSetManualControl(EMIF_ADUMP_ON);
+////                                break;
+////                            case 7:
+////                                ethSetManualControl(EMIF_BDUMP_ON);
+////                                break;
+////                            case 8:
+////                                ethSetManualControl(EMIF_BDUMP_ON);
+////                                break;
+////                            case 9:
+////                                ethSetManualControl(EMIF_WSS_ON);
+////                                break;
+////                            case 10:
+////                                ethSetManualControl(EMIF_WSS_ON);
+////                                break;
+////                            case 11:
+////                                ethSetManualControl(EMIF_APPLY_OFF);
+////                                break;
+////                            case 12:
+////                                ethSetManualControl(EMIF_RELEASE_OFF);
+////                                break;
+////                            case 13:
+////                                ethSetManualControl(EMIF_ADUMP_OFF);
+////                                break;
+////                            case 14:
+////                                ethSetManualControl(EMIF_BDUMP_OFF);
+////                                break;
+////                            case 15:
+////                                ethSetManualControl(EMIF_WSS_OFF);
+////                                break;
+////                            case 16:
+////                                ethSetManualControl(EMIF_SCO_ON);
+////                                break;
+////                            case 17:
+////                                ethSetManualControl(EMIF_SCO_OFF);
+////                                break;
+////                            case 18:
+////                                ethSetManualControl(EMIF_FAULT_ON);
+////                                break;
+////                            case 19:
+////                                ethSetManualControl(EMIF_FAULT_OFF);
+////                                break;
+////                        }
+////
+////                        if(inBuf[0] != 19){
+////                            //energize brake fault output
+////                            ethSetManualControl(EMIF_FAULT_ON);
+////                        }
+////                    }
+////                }
+////                break;
 //            case 148: //used for auto test in BTU
 //                sprintf(outBuf, "Firmware Version: 2.03 \n");
-//                sprintf(outBuf+strlen(outBuf), "FPGA Version Contents: %X \n", ethReadEmifLocation(EMIF_VERSION));
+////                sprintf(outBuf+strlen(outBuf), "FPGA Version Contents: %X \n", ethReadEmifLocation(EMIF_VERSION));
 //                sprintf(outBuf+strlen(outBuf), "NandSignature(High,Low)= (0,0) \n"); //no idea what this means
 //                sprintf(outBuf+strlen(outBuf), "Timestamp1: 1/1/1, 1:1:1.1 \n");
 //                sprintf(outBuf+strlen(outBuf), "IP Address: 1:1:1:1");

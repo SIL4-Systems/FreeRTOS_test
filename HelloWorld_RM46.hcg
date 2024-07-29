@@ -296,8 +296,7 @@
         <NAME>mibspi.h</NAME>
       </HDRMIBSPI>
       <SRCMIBSPI>
-        <NAME>mibspi.c</NAME>
-      </SRCMIBSPI>
+        </SRCMIBSPI>
       <HDRSPI_R>
         <NAME>reg_spi.h</NAME>
       </HDRSPI_R>
@@ -305,8 +304,7 @@
         <NAME>spi.h</NAME>
       </HDRSPI>
       <SRCSPI>
-        <NAME>spi.c</NAME>
-      </SRCSPI>
+        </SRCSPI>
       <HDRCAN_R>
         <NAME>reg_can.h</NAME>
       </HDRCAN_R>
@@ -314,8 +312,7 @@
         <NAME>can.h</NAME>
       </HDRCAN>
       <SRCCAN>
-        <NAME>can.c</NAME>
-      </SRCCAN>
+        </SRCCAN>
       <HDRADC_R>
         <NAME>reg_adc.h</NAME>
       </HDRADC_R>
@@ -323,8 +320,7 @@
         <NAME>adc.h</NAME>
       </HDRADC>
       <SRCADC>
-        <NAME>adc.c</NAME>
-      </SRCADC>
+        </SRCADC>
       <HET1ASMHDR>
         <NAME/>
       </HET1ASMHDR>
@@ -341,8 +337,7 @@
         <NAME>het.h</NAME>
       </HDRHET>
       <SRCHET>
-        <NAME>het.c</NAME>
-      </SRCHET>
+        </SRCHET>
       <HDRHTU_R>
         <NAME>reg_htu.h</NAME>
       </HDRHTU_R>
@@ -371,8 +366,7 @@
         <NAME>i2c.h</NAME>
       </HDRI2C>
       <SRCI2C>
-        <NAME>i2c.c</NAME>
-      </SRCI2C>
+        </SRCI2C>
       <HDR1EMAC>
         <NAME>emac.h</NAME>
       </HDR1EMAC>
@@ -410,8 +404,7 @@
         <NAME>dcc.h</NAME>
       </HDRDCC>
       <SRCDCC>
-        <NAME>dcc.c</NAME>
-      </SRCDCC>
+        </SRCDCC>
       <HDREMIF_R>
         <NAME>reg_emif.h</NAME>
       </HDREMIF_R>
@@ -419,8 +412,7 @@
         <NAME>emif.h</NAME>
       </HDREMIF>
       <SRCEMIF>
-        <NAME>emif.c</NAME>
-      </SRCEMIF>
+        </SRCEMIF>
       <HDRPOM_R>
         <NAME>reg_pom.h</NAME>
       </HDRPOM_R>
@@ -428,8 +420,7 @@
         <NAME>pom.h</NAME>
       </HDRPOM>
       <SRCPOM>
-        <NAME>pom.c</NAME>
-      </SRCPOM>
+        </SRCPOM>
       <HDR1USB>
         <NAME>usbcdc.h</NAME>
       </HDR1USB>
@@ -689,7 +680,7 @@
         <PATH>include\mibspi.h</PATH>
       </HDRMIBSPI>
       <SRCMIBSPI>
-        <PATH>source\mibspi.c</PATH>
+        <PATH></PATH>
       </SRCMIBSPI>
     </FILENAMES>
   </MIBSPI>
@@ -702,7 +693,7 @@
         <PATH>include\spi.h</PATH>
       </HDRSPI>
       <SRCSPI>
-        <PATH>source\spi.c</PATH>
+        <PATH></PATH>
       </SRCSPI>
     </FILENAMES>
   </SPI>
@@ -715,7 +706,7 @@
         <PATH>include\can.h</PATH>
       </HDRCAN>
       <SRCCAN>
-        <PATH>source\can.c</PATH>
+        <PATH></PATH>
       </SRCCAN>
     </FILENAMES>
   </CAN>
@@ -728,7 +719,7 @@
         <PATH>include\adc.h</PATH>
       </HDRADC>
       <SRCADC>
-        <PATH>source\adc.c</PATH>
+        <PATH></PATH>
       </SRCADC>
     </FILENAMES>
   </ADC>
@@ -744,7 +735,7 @@
         <PATH>include\het.h</PATH>
       </HDRHET>
       <SRCHET>
-        <PATH>source\het.c</PATH>
+        <PATH></PATH>
       </SRCHET>
       <HDRHTU_R>
         <PATH>include\reg_htu.h</PATH>
@@ -776,7 +767,7 @@
         <PATH>include\i2c.h</PATH>
       </HDRI2C>
       <SRCI2C>
-        <PATH>source\i2c.c</PATH>
+        <PATH></PATH>
       </SRCI2C>
     </FILENAMES>
   </I2C>
@@ -823,7 +814,7 @@
         <PATH>include\dcc.h</PATH>
       </HDRDCC>
       <SRCDCC>
-        <PATH>source\dcc.c</PATH>
+        <PATH></PATH>
       </SRCDCC>
     </FILENAMES>
   </DCC>
@@ -836,7 +827,7 @@
         <PATH>include\emif.h</PATH>
       </HDREMIF>
       <SRCEMIF>
-        <PATH>source\emif.c</PATH>
+        <PATH></PATH>
       </SRCEMIF>
     </FILENAMES>
   </EMIF>
@@ -849,7 +840,7 @@
         <PATH>include\pom.h</PATH>
       </HDRPOM>
       <SRCPOM>
-        <PATH>source\pom.c</PATH>
+        <PATH></PATH>
       </SRCPOM>
     </FILENAMES>
   </POM>
